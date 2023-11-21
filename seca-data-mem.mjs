@@ -11,6 +11,13 @@ export function addGroup(group) {
     return newGroup
 }
 
+export function updateGroup(newGroup) {
+    const group = groups.get(newGroup.id)
+    group.name = newGroup.name
+    group.description = newGroup.description
+    return group
+}
+
 export function addUser(user) {
 
     for(let [token, checkedUser] of users) {
@@ -26,6 +33,11 @@ export function addUser(user) {
 
 export function findUser(userToken) {
     const user = users.get(userToken)
-    if(user) return user.token
-    throw errors.USER_NOT_FOUND()
+    if(user) return user
+    throw errors.USER_NOT_FOUND(userToken)
+}
+
+
+export function getGroup(id) {
+    return groups.get(id) 
 }

@@ -20,8 +20,10 @@ export function createGroup(newGroup, userToken) {
 }
 
 export function updateGroup(groupID, newGroup, userToken) {
-    const userID = getUserId(userToken)
-    const group = getGroup(groupID, userID)
+    const user = getUserId(userToken)
+    const group = getGroup(groupID, user)
+    group.name = newGroup.name
+    group.description = newGroup.description
     return secaData.updateGroup(group)
 }
 
@@ -36,13 +38,19 @@ function getUserId(userToken) {
 }
 
 
-function getGroup(id, token) {
-    if(!validateUUID(id)) throw errors.INVALID_ARGUMENT(id)
-    return
+function getGroup(groupID, user) {
+
+    if(!validateUUID(groupID)) throw errors.INVALID_ARGUMENT(groupID)
+
+    const group = secaData.getGroup(groupID)
+
+    if(!group) throw errors.NOT_FOUND(`Group with id ${groupID}`)
+
+    if (group.userID.token != user.token) throw errors.NOT_AUTHORIZED(`User ${user.name}`, group.name)
+    
+    return group
+
 }
-
-
-
 
 
 function validateUUID(str) {

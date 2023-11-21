@@ -1,5 +1,5 @@
 #@token = 14d72b99-48f6-48d3-94d3-5a4dcfd96c81
-@token = a7daf442-f317-4c74-8539-5eecb40f5e43
+@token = 43cf57fe-ba43-43ee-ac3e-ea678dc95ddd
 
 
 POST http://localhost:1904/users
@@ -28,13 +28,13 @@ Authorization: Bearer {{token}}
 }
 
 ### update group with auth
-PUT http://localhost:1904/groups/8278f80a-630e-4378-bfed-8bcf1bbd7e8f
+PUT http://localhost:1904/groups/412e3185-782b-4334-b389-96f5bfe5bd94
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
     "name": "updatetest1",
-    "description": "grupo teste" 
+    "description": "grupoupdated" 
 }
 
 

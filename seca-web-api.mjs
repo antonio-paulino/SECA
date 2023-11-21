@@ -75,7 +75,7 @@ function createGroupProcessor(req, res, token) {
     const group = secaServices.createGroup(newGroup, token)
 
     return res.status(201).json(group)
-    
+
 }
 
 function updateGroupProcessor(req, res, token) {
@@ -86,11 +86,11 @@ function updateGroupProcessor(req, res, token) {
     const newGroup = new Group(req.body.name, req.body.description)
     const group = secaServices.updateGroup(req.params.id, newGroup, token)
 
-    return res.status(201).json(group)
+    return res.json(group)
 }
 
 function getAllGroupsProcessor(req, res, token) {
- 
+    
 }
 
 function deleteGroupProcessor(req, res, token) {
