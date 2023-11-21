@@ -29,7 +29,7 @@ app.get('/groups', secaApi.getAllGroups)
 app.delete('/groups/:id', secaApi.deleteGroup)
 
 // Get specific group : GET /groups/:id
-app.post('/users', secaApi.getGroup)
+app.post('/groups/:id', secaApi.getGroup)
 
 // Add event to group : POST /groups/:id/events
 app.put('/groups/:id/events', secaApi.addToGroup)

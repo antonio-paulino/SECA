@@ -1,0 +1,67 @@
+#@token = 14d72b99-48f6-48d3-94d3-5a4dcfd96c81
+@token = a7daf442-f317-4c74-8539-5eecb40f5e43
+
+
+POST http://localhost:1904/users
+Content-Type: application/json
+
+{
+    "username": "sfsf" 
+}
+
+### create group no auth
+POST http://localhost:1904/groups
+Content-Type: application/json
+
+{
+    "name": "teste1",
+    "description": "grupo teste" 
+}
+### create group with auth
+POST http://localhost:1904/groups
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "teste1",
+    "description": "grupo teste" 
+}
+
+### update group with auth
+PUT http://localhost:1904/groups/8278f80a-630e-4378-bfed-8bcf1bbd7e8f
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "updatetest1",
+    "description": "grupo teste" 
+}
+
+
+### Get all tasks
+GET http://localhost:1904/tasks
+Authorization: Bearer {{token}}
+
+### Get a Task
+GET http://localhost:1904/tasks/abc
+Authorization: Bearer {{token}}
+
+### Create a Task
+POST http://localhost:1904/tasks
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Learn HTTP",
+    "description": "Learning HTTP is very important to develop web applications"
+}
+
+### Delete a Task
+DELETE http://localhost:1904/tasks/1
+Authorization: Bearer {{token}}
+
+### Update a Task
+PUT http://localhost:1904/tasks/1
+
+###
+https://www.w3.org/TR/webarch/
