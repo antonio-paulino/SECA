@@ -27,9 +27,47 @@ export function updateGroup(groupID, newGroup, userToken) {
     return secaData.updateGroup(group)
 }
 
+export function getAllGroups(userToken) {
+    const user = getUserId(userToken)
+    return secaData.getGroups(user)
+}
+
 export function createUser(username) {
     const user = new User(username)
     return secaData.addUser(user)
+}
+
+export function deleteGroup(groupId,token) {
+
+    const user = getUserId(token)
+
+    const removedGroup = getGroup(groupId,user)
+
+    return secaData.deleteGroup(removedGroup)
+
+}
+
+export function getGroupServ(groupID, token) {
+
+    const user = getUserId(token)
+
+    const group = getGroup(groupID, user)
+
+    return group
+
+}
+
+export async function addToGroup(groupID, eventID, token) {
+    const user = getUserId(token)
+    const group = getGroup(groupID, user)
+    const event = await ticketMaster.getEventByID(eventID)
+    return await secaData.addEvent(group, event)
+}
+
+export function removeEventFromGroup(groupId, eventId, token){
+    const user = getUserId(token)
+    const group = getGroup(groupId, user)
+    return secaData.removeEvent(group, eventId)
 }
 
 

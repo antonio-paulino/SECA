@@ -2,6 +2,7 @@ import * as secaServices from './seca-services.mjs'
 import errorToHttp from './errors-to-http-responses.mjs'
 import errors from './errors.mjs'
 import {Group} from './seca-classes.mjs'
+
 export const getPopularEvents = processRequest(getPopularEventsProcessor)
 export const searchEvent = processRequest(searchEventProcessor)
 export const createUser = processRequest(createUserProcessor)
@@ -29,7 +30,6 @@ function processRequest(reqProcessor, auth) {
             return await reqProcessor(req, rsp) 
           
         } catch (e) {
-            console.log(e)
             const rspError = errorToHttp(e)
             rsp.status(rspError.status).json(rspError.body)
         }
@@ -90,23 +90,56 @@ function updateGroupProcessor(req, res, token) {
 }
 
 function getAllGroupsProcessor(req, res, token) {
-    
+    const groups = secaServices.getAllGroups(token)
+    res.json(groups)
 }
 
 function deleteGroupProcessor(req, res, token) {
- 
+
+    if (!req.params.id) {
+        throw errors.ARGUMENT_MISSING('Id');
+    }
+
+    secaServices.deleteGroup(req.params.id, token);
+
+    return res.status(200).json();
+
 }
 
 function getGroupProcessor(req, res, token) {
- 
+
+    if (!req.params.id) {
+        throw errors.ARGUMENT_MISSING('Id');
+    }
+
+    const group = secaServices.getGroupServ(req.params.id, token)
+  
+    return res.json(group)
+
 }
 
-function addToGroupProcessor(req, res, token) {
- 
+async function addToGroupProcessor(req, res, token) {
+    if (!req.params.id) {
+        throw errors.ARGUMENT_MISSING('Id');
+    }
+
+    if(!req.body.id) {
+        throw errors.INVALID_BODY()
+    }
+
+    const group = await secaServices.addToGroup(req.params.id, req.body.id, token)
+    
+    return res.json(group)
+
 }
 
 function removeFromGroupProcessor(req, res, token) {
- 
+    if (!req.params.groupID) throw errors.ARGUMENT_MISSING('Group id');
+    if (!req.params.eventID) throw errors.ARGUMENT_MISSING('Event id');
+
+    const removedEvent = secaServices.removeEventFromGroup(req.params.groupID, req.params.eventID, token)
+
+    return res.json(removedEvent)
 }
 
 function createUserProcessor(req, res) {

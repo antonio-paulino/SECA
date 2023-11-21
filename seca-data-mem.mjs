@@ -18,6 +18,43 @@ export function updateGroup(newGroup) {
     return group
 }
 
+export function removeEvent(group, eventID) {
+
+    const groupToRemove = groups.get(group.id)
+    const eventIdx = getEventIndex(group, eventID) 
+
+    if(eventIdx == -1) throw errors.NOT_FOUND(`Event with id ${eventID} in group ${group.name}`)
+
+    groupToRemove.events.splice(eventIdx, 1)
+    
+    return groupToRemove
+
+}
+
+export function getGroups(user) {
+    let userGroups = []
+    for(let [token, checkedGroup] of groups) {
+        if(checkedGroup.userID == user) 
+            userGroups.push(checkedGroup)
+    }
+    return userGroups
+}
+
+export async function addEvent(group, event) {
+
+    const groupToAdd = groups.get(group.id)
+
+    if(getEventIndex(group, event.id) >= 0) throw errors.EVENT_ALREADY_IN_GROUP(event)
+
+    groupToAdd.events.push(event)
+    return groupToAdd
+
+}
+
+export function deleteGroup(group){
+    return groups.delete(group.id)
+}
+
 export function addUser(user) {
 
     for(let [token, checkedUser] of users) {
@@ -34,10 +71,28 @@ export function addUser(user) {
 export function findUser(userToken) {
     const user = users.get(userToken)
     if(user) return user
-    throw errors.USER_NOT_FOUND(userToken)
+    throw errors.NOT_FOUND(`User with token ${userToken}`)
 }
 
 
 export function getGroup(id) {
     return groups.get(id) 
+}
+
+
+function getEventIndex(group, eventID) {
+
+    let idx = -1
+    let count = 0
+
+    group.events.forEach(event => {
+        if (event.id == eventID) {
+            idx = count
+            return idx
+        }
+        count++
+    });
+
+    return idx
+
 }

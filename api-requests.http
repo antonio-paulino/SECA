@@ -1,12 +1,19 @@
 #@token = 14d72b99-48f6-48d3-94d3-5a4dcfd96c81
-@token = 43cf57fe-ba43-43ee-ac3e-ea678dc95ddd
+//@token = 21418bc8-68ba-41ec-9045-036f1a308fde
+@token = dc83a0ca-445d-4d24-bc1e-171b9f105a7f
 
 
+GET  http://localhost:1904/events/popular/?s=5&p=2
+
+### Search events by name
+GET  http://localhost:1904/events/?name=football
+
+### Create user
 POST http://localhost:1904/users
 Content-Type: application/json
 
 {
-    "username": "sfsf" 
+    "username": "asd213" 
 }
 
 ### create group no auth
@@ -23,12 +30,20 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "teste1",
+    "name": "teste3",
     "description": "grupo teste" 
 }
 
+### get group with auth
+GET http://localhost:1904/groups/57109794-da86-49e8-9be6-a6d0ea7e1e84
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+
+
 ### update group with auth
-PUT http://localhost:1904/groups/412e3185-782b-4334-b389-96f5bfe5bd94
+PUT http://localhost:1904/groups/677d805a-cf7e-4fc4-a130-e9653927d6aa
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -38,30 +53,28 @@ Authorization: Bearer {{token}}
 }
 
 
-### Get all tasks
-GET http://localhost:1904/tasks
-Authorization: Bearer {{token}}
-
-### Get a Task
-GET http://localhost:1904/tasks/abc
-Authorization: Bearer {{token}}
-
-### Create a Task
-POST http://localhost:1904/tasks
+### add event to group
+PUT http://localhost:1904/groups/677d805a-cf7e-4fc4-a130-e9653927d6aa/events
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "title": "Learn HTTP",
-    "description": "Learning HTTP is very important to develop web applications"
+    "id": "G5dIZ9YmSXKWz"
 }
 
-### Delete a Task
-DELETE http://localhost:1904/tasks/1
+### Delete event from group
+DELETE http://localhost:1904/groups/677d805a-cf7e-4fc4-a130-e9653927d6aa/events/G5dIZ9YmSXKWz
+Content-Type: application/json
 Authorization: Bearer {{token}}
 
-### Update a Task
-PUT http://localhost:1904/tasks/1
 
-###
-https://www.w3.org/TR/webarch/
+### Get all groups
+GET http://localhost:1904/groups
+Authorization: Bearer {{token}}
+
+### Delete group
+DELETE http://localhost:1904/groups/5a53ebe3-4f88-44cf-9f60-f07704b46dde
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+

@@ -29,13 +29,13 @@ app.get('/groups', secaApi.getAllGroups)
 app.delete('/groups/:id', secaApi.deleteGroup)
 
 // Get specific group : GET /groups/:id
-app.post('/groups/:id', secaApi.getGroup)
+app.get('/groups/:id', secaApi.getGroup)
 
-// Add event to group : POST /groups/:id/events
+// Add event to group : PUT /groups/:id/events
 app.put('/groups/:id/events', secaApi.addToGroup)
 
 // Remove event from group : DELETE /groups/:id/events/:id
-app.delete('/groups/:id/events', secaApi.removeFromGroup)
+app.delete('/groups/:groupID/events/:eventID', secaApi.removeFromGroup)
 
 // Add new user : POST /users
 app.post('/users', secaApi.createUser)
