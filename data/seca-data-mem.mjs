@@ -2,7 +2,7 @@ import { Group, User } from "../seca-classes.mjs"
 import errors from '../common/errors.mjs'
 import crypto from 'crypto'
 
-let users = new Map
+export let users = new Map
 
 //create users for postman tests
 const user1 = new User('user 1', "e5ab7d81-f7df-4d76-9acf-0d3c0c73649f")
@@ -10,7 +10,7 @@ const user2 = new User('user 2', "e5ab7d81-f7df-4d76-9acf-0d3c0c73439f")
 users.set("e5ab7d81-f7df-4d76-9acf-0d3c0c73649f", user1)
 users.set("e5ab7d81-f7df-4d76-9acf-0d3c0c73439f", user2)
 
-let groups = new Map
+export let groups = new Map
 
 groups.set("a5ab7d81-f7df-4d76-9acf-0d3c0c73649f", new Group("Test group user 1", "This is a test group that belongs to user 1", user1, "a5ab7d81-f7df-4d76-9acf-0d3c0c73649f"))
 groups.set("c5ab7d81-f7df-4d76-9acf-0d3c0c73649f", new Group("Test group user 2", "This is a test group that belongs to user 2", user2, "c5ab7d81-f7df-4d76-9acf-0d3c0c73649f"))
@@ -90,7 +90,7 @@ export function getGroup(id) {
 }
 
 
-function getEventIndex(group, eventID) {
+export function getEventIndex(group, eventID) {
 
     let idx = -1
     let count = 0
