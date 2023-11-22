@@ -1,7 +1,7 @@
-import * as secaServices from './seca-services.mjs'
+import * as secaServices from '../services/seca-services.mjs'
 import errorToHttp from './errors-to-http-responses.mjs'
-import errors from './errors.mjs'
-import {Group} from './seca-classes.mjs'
+import errors from '../common/errors.mjs'
+import {Group} from '../seca-classes.mjs'
 
 export const getPopularEvents = processRequest(getPopularEventsProcessor)
 export const searchEvent = processRequest(searchEventProcessor)
@@ -137,9 +137,9 @@ function removeFromGroupProcessor(req, res, token) {
     if (!req.params.groupID) throw errors.ARGUMENT_MISSING('Group id');
     if (!req.params.eventID) throw errors.ARGUMENT_MISSING('Event id');
 
-    const removedEvent = secaServices.removeEventFromGroup(req.params.groupID, req.params.eventID, token)
+    const newGroup = secaServices.removeEventFromGroup(req.params.groupID, req.params.eventID, token)
 
-    return res.json(removedEvent)
+    return res.json(newGroup)
 }
 
 function createUserProcessor(req, res) {

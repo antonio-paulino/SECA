@@ -1,7 +1,7 @@
-import * as ticketMaster from './tm-events-data.mjs' 
-import * as secaData from './seca-data-mem.mjs'
-import {Group, User} from './seca-classes.mjs'
-import errors from './errors.mjs'
+import * as ticketMaster from '../data/tm-events-data.mjs' 
+import * as secaData from '../data/seca-data-mem.mjs'
+import {Group, User} from '../seca-classes.mjs'
+import errors from '../common/errors.mjs'
 
 
 export async function getPopularEvents(s, p) {
@@ -38,23 +38,15 @@ export function createUser(username) {
 }
 
 export function deleteGroup(groupId,token) {
-
     const user = getUserId(token)
-
     const removedGroup = getGroup(groupId,user)
-
     return secaData.deleteGroup(removedGroup)
-
 }
 
 export function getGroupServ(groupID, token) {
-
     const user = getUserId(token)
-
     const group = getGroup(groupID, user)
-
     return group
-
 }
 
 export async function addToGroup(groupID, eventID, token) {
@@ -79,13 +71,9 @@ function getUserId(userToken) {
 function getGroup(groupID, user) {
 
     if(!validateUUID(groupID)) throw errors.INVALID_ARGUMENT(groupID)
-
     const group = secaData.getGroup(groupID)
-
     if(!group) throw errors.NOT_FOUND(`Group with id ${groupID}`)
-
     if (group.userID.token != user.token) throw errors.NOT_AUTHORIZED(`User ${user.name}`, group.name)
-    
     return group
 
 }

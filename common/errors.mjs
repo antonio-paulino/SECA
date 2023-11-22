@@ -2,11 +2,10 @@ export const ERROR_CODES = {
     INVALID_ARGUMENT: 1,
     INVALID_BODY: 2,
     NOT_FOUND: 3,
-    USER_ALREADY_EXISTS: 4,
+    ALREADY_EXISTS: 4,
     NOT_AUTHORIZED: 5,
     TICKETMASTER_ERR: 6,
     ARGUMENT_MISSING: 7,
-    EVENT_ALREADY_IN_GROUP: 8
 }
 
 export default {
@@ -19,8 +18,8 @@ export default {
     NOT_FOUND: (what) => { 
         return new Error(ERROR_CODES.NOT_FOUND,`${what} not found`)
     },
-    USER_ALREADY_EXISTS: (who) => {
-        return new Error(ERROR_CODES.USER_ALREADY_EXISTS,`Username ${who} is taken`)
+    ALREADY_EXISTS: (what, where) => {
+        return new Error(ERROR_CODES.ALREADY_EXISTS,`${what} already exists ${where}`)
     },
     NOT_AUTHORIZED: (who, what) => { 
         return new Error(ERROR_CODES.NOT_AUTHORIZED,`${who} has no access to ${what}`)
@@ -31,12 +30,6 @@ export default {
     ARGUMENT_MISSING: argName => {
         return new Error(ERROR_CODES.ARGUMENT_MISSING, `${argName} not provided`)
     },
-    EVENT_ALREADY_IN_GROUP: event => {
-        return new Error(ERROR_CODES.EVENT_ALREADY_IN_GROUP, `Event with id ${event.id} already in group`)
-    }
-
-
-
     
 }
 

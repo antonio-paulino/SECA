@@ -1,6 +1,6 @@
 import express from 'express'
 
-import * as secaApi from './seca-web-api.mjs'
+import * as secaApi from './web-api/seca-web-api.mjs'
 
 const PORT = 1904
 
@@ -20,26 +20,25 @@ app.get('/events', secaApi.searchEvent)
 app.post('/groups', secaApi.createGroup)
 
 // Update Group name and description: PUT /groups/:id
-app.put('/groups/:id', secaApi.updateGroup)
+app.put('/group/:id', secaApi.updateGroup)
 
 // List all groups : GET /groups
 app.get('/groups', secaApi.getAllGroups)
 
 // Delete Group: DELETE /groups/:id
-app.delete('/groups/:id', secaApi.deleteGroup)
+app.delete('/group/:id', secaApi.deleteGroup)
 
 // Get specific group : GET /groups/:id
-app.get('/groups/:id', secaApi.getGroup)
+app.get('/group/:id', secaApi.getGroup)
 
 // Add event to group : PUT /groups/:id/events
-app.put('/groups/:id/events', secaApi.addToGroup)
+app.put('/group/:id/events', secaApi.addToGroup)
 
 // Remove event from group : DELETE /groups/:id/events/:id
-app.delete('/groups/:groupID/events/:eventID', secaApi.removeFromGroup)
+app.delete('/group/:groupID/events/:eventID', secaApi.removeFromGroup)
 
 // Add new user : POST /users
 app.post('/users', secaApi.createUser)
 
 app.listen(PORT, () => console.log(`Server listening in http://localhost:${PORT}`))
 
-console.log("End setting up server")

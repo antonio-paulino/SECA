@@ -1,9 +1,19 @@
-import { Group, User } from "./seca-classes.mjs"
-import errors from './errors.mjs'
+import { Group, User } from "../seca-classes.mjs"
+import errors from '../common/errors.mjs'
 import crypto from 'crypto'
 
 let users = new Map
+
+//create users for postman tests
+const user1 = new User('user 1', "e5ab7d81-f7df-4d76-9acf-0d3c0c73649f")
+const user2 = new User('user 2', "e5ab7d81-f7df-4d76-9acf-0d3c0c73439f")
+users.set("e5ab7d81-f7df-4d76-9acf-0d3c0c73649f", user1)
+users.set("e5ab7d81-f7df-4d76-9acf-0d3c0c73439f", user2)
+
 let groups = new Map
+
+groups.set("a5ab7d81-f7df-4d76-9acf-0d3c0c73649f", new Group("Test group user 1", "This is a test group that belongs to user 1", user1, "a5ab7d81-f7df-4d76-9acf-0d3c0c73649f"))
+groups.set("c5ab7d81-f7df-4d76-9acf-0d3c0c73649f", new Group("Test group user 2", "This is a test group that belongs to user 2", user2, "c5ab7d81-f7df-4d76-9acf-0d3c0c73649f"))
 
 export function addGroup(group) {
     const newGroup = new Group(group.name, group.description, group.userID, crypto.randomUUID())
@@ -44,7 +54,7 @@ export async function addEvent(group, event) {
 
     const groupToAdd = groups.get(group.id)
 
-    if(getEventIndex(group, event.id) >= 0) throw errors.EVENT_ALREADY_IN_GROUP(event)
+    if(getEventIndex(group, event.id) >= 0) throw errors.ALREADY_EXISTS(event, `in ${group.name}`)
 
     groupToAdd.events.push(event)
     return groupToAdd
@@ -59,12 +69,12 @@ export function addUser(user) {
 
     for(let [token, checkedUser] of users) {
         if(checkedUser.name == user.name) 
-            throw errors.USER_ALREADY_EXISTS(user.name)
+            throw errors.ALREADY_EXISTS(user.name, 'in users')
     }
 
     let newUser = new User(user.name, crypto.randomUUID())
     users.set(newUser.token, newUser)
-
+    
     return newUser
 }
 

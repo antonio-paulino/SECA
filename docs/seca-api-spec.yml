@@ -1,0 +1,518 @@
+openapi: 3.0.1
+info:
+  title: Tasks API
+  description: This is a simple API for managing event and group operations.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - description: Localhost server for testing API
+    url: http://localhost:1904
+
+
+tags:
+- name: Groups
+- name: Events
+- name: Users
+
+
+paths:
+    /events:
+      description: Resource that contains events
+      get:
+          tags:
+            - Events
+          summary: Search events by name 
+          description: By passing in a name, you can search for events
+          parameters:
+              - name: name
+                in: query
+                required: true
+                description: The name to search for
+                schema:
+                    type: string
+              - name: s
+                in: query
+                description: number of events to return
+                schema:
+                    default: 30
+                    minimum: 0
+                    type: integer
+              - name: p
+                in: query
+                description: the page number of the results to show
+                schema:
+                    minimum: 0
+                    default: 1
+                    type: integer
+          responses:
+            200:
+              description: get events that match the name, with the specified amount of results and page number
+              content:
+                  application/json:
+                      schema:
+                        type: array
+                        items:
+                          $ref: "#components/schemas/Event"
+            400:
+              $ref: "#/components/responses/400BadRequest"
+
+
+    /events/popular:
+      description: Resource that contains popular events
+      get:
+          tags:
+            - Events
+          summary: Search most popular eventss
+          description: By passing in arguments, you can search for the most popular events
+          parameters:
+              - name: s
+                in: query
+                description: number of events to return
+                schema:
+                    default: 30
+                    minimum: 0
+                    type: integer
+              - name: p
+                in: query
+                description: the page number of the results to show
+                schema:
+                    minimum: 0
+                    default: 1
+                    type: integer
+          responses:
+            200:
+              description: get the list of most popular events
+              content:
+                  application/json:
+                      schema:
+                        type: array
+                        items:
+                          $ref: "#components/schemas/Event"
+            400:
+              $ref: "#/components/responses/400BadRequest"
+
+
+    /users:
+      description: The resource that contains all users
+      post:
+          tags:
+          - Users
+          summary: Adds a user
+          description: Adds a user to the system
+          requestBody:
+            description: User to add
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/NewUser'
+            required: true
+          responses:
+            201:
+              description: New user created
+              content:
+                application/json:
+                  schema:
+                    required:
+                    - token
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        format: uuid
+            400:
+              $ref: "#/components/responses/400BadRequest"
+
+    /groups:
+        description: The resource that contains groups
+        get:
+          tags:
+            - Groups
+          summary: Get Groups
+          description: Get all groups belonging to user
+          security: 
+            - bearerAuth: []
+          parameters:
+            - name: Authorization
+              in: header
+              required: true
+              description: user token for identification
+              schema:
+                  type: string
+                  format: uuid
+          responses:
+            200:
+              description: Groups returned
+              content: 
+                application/json:
+                  schema:
+                      type: array
+                      items: 
+                        $ref: "#components/schemas/Group"
+            404:
+              $ref: "#/components/responses/404NotFound"
+            400:
+              $ref: "#/components/responses/400BadRequest"
+
+        post:  
+          tags:
+            - Groups
+          summary: Create Group
+          description: Add group to list of groups belonging to user
+          requestBody:
+            description: Group to add
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/NewGroup'
+            required: true
+          security: 
+            - bearerAuth: []
+          parameters:
+            - name: Authorization
+              in: header
+              required: true
+              description: user token for identification
+              schema:
+                  type: string
+                  format: uuid
+          responses:
+            201:
+              description: Group created
+              content: 
+                application/json:
+                  schema:
+                      $ref: '#components/schemas/Group'
+            400:
+              $ref: "#/components/responses/400BadRequest"
+
+            404:
+              $ref: "#/components/responses/404NotFound"
+
+    /group/{id}:
+        description: The resource that represents one Group
+        get:
+          tags:
+            - Groups
+          summary: Get a Group given its id
+          security: 
+            - bearerAuth: []
+          parameters:
+            - name: Authorization
+              in: header
+              required: true
+              description: user token for identification
+              schema:
+                  type: string
+                  format: uuid
+            - name: id
+              in: path
+              description: ID of group to get
+              required: true
+              schema: 
+                  type: string
+                  format: uuid
+          responses:
+            200:
+              description: Group returned
+              content:
+                application/json:
+                    schema: 
+                      $ref: '#components/schemas/Group'
+            404:
+              $ref: "#/components/responses/404NotFound"
+
+            400:
+              $ref: "#/components/responses/400BadRequest"
+              
+        delete:
+          tags:
+            - Groups
+          summary: Delete a Group given its id
+          security: 
+            - bearerAuth: []
+          parameters:
+            - name: Authorization
+              in: header
+              required: true
+              description: user token for identification
+              schema:
+                  type: string
+                  format: uuid
+            - name: id
+              in: path
+              description: ID of group to delete
+              required: true
+              schema: 
+                  type: string
+                  format: uuid
+          responses:
+            200:
+              description: Group deleted
+              content: {}
+            
+            404:
+              $ref: "#/components/responses/404NotFound"
+
+            400:
+              $ref: "#/components/responses/400BadRequest"
+        put:
+          tags:
+            - Groups
+          summary: Update a group's name and description given its id
+          requestBody:
+            description: Updated group
+            content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/NewGroup'
+            required: true
+          security: 
+            - bearerAuth: []
+          parameters:
+            - name: Authorization
+              in: header
+              required: true
+              description: user token for identification
+              schema:
+                  type: string
+                  format: uuid
+            - name: id
+              in: path
+              description: ID of group to update
+              required: true
+              schema: 
+                  type: string
+                  format: uuid
+          responses:
+            200:
+              description: Group Updated
+              content: 
+                application/json:
+                    schema: 
+                      $ref: '#components/schemas/Group'
+
+            404:
+              $ref: "#/components/responses/404NotFound"
+
+            400:
+              $ref: "#/components/responses/400BadRequest"
+
+    /group/{id}/events:
+        description: resource that represents a Group's events
+        put:
+          tags:
+            - Groups
+            - Events
+          summary: Add new event to Group
+          requestBody:
+            description: ID of event to add
+            content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/NewEvent'
+            required: true
+          security: 
+            - bearerAuth: []
+          parameters:
+            - name: Authorization
+              in: header
+              required: true
+              description: user token for identification
+              schema:
+                  type: string
+                  format: uuid
+            - name: id
+              in: path
+              description: ID of group to add event
+              required: true
+              schema: 
+                  type: string
+                  format: uuid
+          responses:
+            200:
+              description: Event added
+              content: 
+                application/json:
+                    schema: 
+                      $ref: '#components/schemas/Group'
+            404:
+              $ref: "#/components/responses/404NotFound"
+
+            400:
+              $ref: "#/components/responses/400BadRequest"
+            
+    /group/{groupID}/events/${eventID}:
+          description: resource that represents an event in a group
+          delete:
+            tags:
+            - Groups
+            - Events
+            summary: Remove event from group
+            security: 
+              - bearerAuth: []
+            parameters:
+              - name: Authorization
+                in: header
+                required: true
+                description: user token for identification
+                schema:
+                    type: string
+                    format: uuid
+              - name: groupID
+                in: path
+                description: ID of group to add event
+                required: true
+                schema: 
+                    type: string
+                    format: uuid
+              - name: eventID
+                in: path
+                description: ID of event to remove
+                required: true
+                schema: 
+                    type: string
+            responses:
+              200:
+                description: Event removed
+                content: 
+                  application/json:
+                      schema: 
+                        $ref: '#components/schemas/Group'
+              404:
+                $ref: "#/components/responses/404NotFound"
+
+              400:
+                $ref: "#/components/responses/400BadRequest"
+
+components:
+    securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+    schemas:
+        NewEvent:
+          required: [id]
+              
+          type: object
+          properties:
+            id:
+              type: string
+              example: Z7r9jZ1AdOvFN
+        Event:
+          required: [id, name, date]
+          type: object
+          properties:
+            id:
+              type: string
+              example: Z7r9jZ1AdOvFN
+            name:
+              type: string
+              example: Miami Hurricanes Football vs. Florida A&M Rattlers Football
+            date:
+              type: string
+              example: 2024-05-17T21:30:00Z
+            genre:
+              type: string
+              example: Football
+            segment:
+              type: string
+              example: Sports
+        Group:
+          type: object
+          required: [id, userID, name, description, events]
+          properties:
+            id:
+              type: string
+              format: uuid
+              example: 78ff5f7a-e0f8-4fdc-8e4a-86e021a9f6e9
+            userID:
+               $ref: "#components/schemas/User"
+            name:
+                type: string
+                example: Football group
+            description:
+                type: string
+                example: Group that contains football events
+            events:
+                type: array
+                items:
+                  $ref: "#components/schemas/Event"
+        NewGroup:
+            type: object
+            required: [name, description]
+            properties:
+              name:
+                  type: string
+                  example: Football group
+              description:
+                  type: string
+                  example: Group that contains football events
+        User:
+          type: object
+          required: [username, userToken]
+          properties:
+            username:
+              type: string
+              example: Bernardo Pereira
+            userToken:
+              type: string
+              format: uuid
+              example: 78ff5f7a-e0f8-4fdc-8e4a-86e021a9f6e9
+
+        NewUser:
+          type: object
+          required: [username]
+          properties:
+            username:
+              type: string
+              example: António Paulino
+        
+        BadRequestError:
+          type: object
+          required: [code, error]
+          properties:
+            code:
+              type: integer
+              example: 
+                - 400
+            error:
+              type: string
+              example: 
+                - Invalid ID
+                
+        NotAuthorized:
+          type: string
+          example: 
+            - Not authorized
+        
+        NotFoundError:
+          type: object
+          required: [code, error]
+          properties:
+            code:
+              type: integer
+              example: 
+                - 404
+            error:
+              type: string
+              example: 
+                - Resource Not Found
+
+    responses:
+      404NotFound:
+        description: "Resource not found"
+        content: 
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/NotFoundError"
+      400BadRequest:
+        description: "Invalid Request because of a missing Parameter, invalid body content or lack of authorization"
+        content: 
+          application/json:
+            schema: 
+              oneOf:
+                -  $ref: "#/components/schemas/BadRequestError"
+                -  $ref: "#/components/schemas/NotAuthorized"
+             
