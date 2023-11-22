@@ -1,0 +1,1188 @@
+{
+	"id": "88d1a7c7-75ed-4573-85c2-331d1bd02716",
+	"name": "SECA API",
+	"timestamp": "2023-11-22T17:24:42.617Z",
+	"collection_id": "31338335-c26bb717-ef47-4907-bf3d-e24fdffcdc5d",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-11-22T17:24:36.055Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "63fecdea-8afe-4686-8d6e-b6b197071a83",
+			"name": "Get Popular Events with s and p",
+			"url": "http://localhost:1904/events/popular?s=5&p=3",
+			"time": 358,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				358
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b086f7c1-101d-45d3-8e1d-97b5226e2b19",
+			"name": "Get popular events with s",
+			"url": "http://localhost:1904/events/popular?s=3",
+			"time": 69,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				69
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "836ca512-28a8-43c5-9a73-f73e79045514",
+			"name": "Get popular events with p",
+			"url": "http://localhost:1904/events/popular?p=10",
+			"time": 137,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				137
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "dfbf49e4-5f1d-417a-9f5f-15a81a720c4b",
+			"name": "Get popular events",
+			"url": "http://localhost:1904/events/popular",
+			"time": 84,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				84
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3bdefd73-7833-442c-8f39-92289f8f33f2",
+			"name": "Popular Events invalid param",
+			"url": "http://localhost:1904/events/popular?p=-1&s=-4",
+			"time": 71,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				71
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "7252f1a1-6980-4307-9962-20e208c43daf",
+			"name": "Search with p and s",
+			"url": "http://localhost:1904/events/?name=football&p=5&s=3",
+			"time": 69,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				69
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b9636507-67d9-4b0b-97af-785690e9f05b",
+			"name": "Search with p",
+			"url": "http://localhost:1904/events/?name=football&p=3",
+			"time": 75,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				75
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "774697b5-07a7-440f-b38d-adaec5abb9a1",
+			"name": "Search with s",
+			"url": "http://localhost:1904/events/?name=basket&s=4",
+			"time": 67,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				67
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e6e649e9-ea4f-4181-894c-2cd51187b1b6",
+			"name": "Search no name",
+			"url": "http://localhost:1904/events/?p=5",
+			"time": 2,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "52b17633-14a8-4ac2-815e-b53f03a101a6",
+			"name": "Search Invalid param",
+			"url": "http://localhost:1904/events/?name=football&p=5&s=-1",
+			"time": 79,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				79
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "498712a7-aaf8-46a1-ab09-3fd213f15f5e",
+			"name": "Search",
+			"url": "http://localhost:1904/events/?name=hockey",
+			"time": 69,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				69
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "adb7b520-8585-4c55-91d5-b16d095db58a",
+			"name": "Create User",
+			"url": "http://localhost:1904/users",
+			"time": 16,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				16
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "6fe0d613-b5f2-4be9-8df0-232758d934cf",
+			"name": "Create Group user 2",
+			"url": "http://localhost:1904/groups",
+			"time": 2,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b8508f3e-94df-4b7e-b9cb-bf15628b3e81",
+			"name": "Create Group No Auth",
+			"url": "http://localhost:1904/groups",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9be8945b-f988-4c5b-a698-1716fa08b166",
+			"name": "Create Group invalid body",
+			"url": "http://localhost:1904/groups",
+			"time": 2,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2747df04-47d8-488e-befd-59e9116457bc",
+			"name": "Create Group Invalid Auth",
+			"url": "http://localhost:1904/groups",
+			"time": 2,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ca7bbb06-f7d1-4bd6-8eef-36957dc0af9c",
+			"name": "Update Group",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 3,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				3
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5f76c4e2-54df-4a5e-92ba-4fda0a661868",
+			"name": "Update Group no Auth",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1d1577a7-6a8f-40b4-8964-79602bec9f99",
+			"name": "Update Group Invalid Body",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b43b4be5-f009-4799-ab36-0c23b1ad5367",
+			"name": "Update Group from different user",
+			"url": "http://localhost:1904/group/c5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "7c30a02a-9efb-4187-b1be-ece105bab54c",
+			"name": "Update Group Invalid Auth",
+			"url": "http://localhost:1904/group/c5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5ef04c04-ee40-47bb-bc2b-7c202c8d1de6",
+			"name": "Update Group Invalid ID",
+			"url": "http://localhost:1904/group/c5ab7d81s424f",
+			"time": 2,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fb527ca1-9c20-4401-a524-5a5847d33384",
+			"name": "Update Group Not Found",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c71249f",
+			"time": 3,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				3
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e04e9a5d-4a7f-4494-8281-6d558401faff",
+			"name": "Update Group User Not Found",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c71249f",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2c269685-6bf1-4935-91f8-a3c63782e5bd",
+			"name": "Get groups user 1",
+			"url": "http://localhost:1904/groups",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "acefe01c-5989-4fbf-a696-7f02433fc3a3",
+			"name": "Get groups user 2",
+			"url": "http://localhost:1904/groups",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a3bf25a3-8ff4-4cee-86c7-ec3d836a1cd5",
+			"name": "Get groups no user",
+			"url": "http://localhost:1904/groups",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "259ac8d3-1207-4714-bc61-46be23244cff",
+			"name": "Get Group user 1",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "beba05ad-a2fb-4e57-8e6c-7a35d5dc1719",
+			"name": "Get Group user 2",
+			"url": "http://localhost:1904/group/c5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "6928eca0-3950-4fb5-842f-8d407c60e545",
+			"name": "Get Group different user",
+			"url": "http://localhost:1904/group/c5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "227aa3cc-865a-4307-99d1-a7359964b205",
+			"name": "Get Group Invalid ID",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-49acf-0d3c0c736111",
+			"time": 2,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f6bed8ff-6387-4c52-9265-bd85e00fc398",
+			"name": "Get Group Not Found",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c736111",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d460eaf0-a69c-49fc-8893-124677a1d72d",
+			"name": "Get Group User Not Found",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c71249f",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "90d7a29f-bf5b-451d-a072-dfc050bdf858",
+			"name": "Add event missing ID",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f/events",
+			"time": 2,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "4e1ea09e-f749-4380-889b-2827c19d6baa",
+			"name": "Add Event User 1",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f/events",
+			"time": 68,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				68
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "83bff9a8-ee40-4072-84c1-25e5277480d0",
+			"name": "Add event already exists",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f/events",
+			"time": 65,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				65
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b750fbdb-a1ed-4fe3-9963-fa646add1c0f",
+			"name": "Add Event Group Not Found",
+			"url": "http://localhost:1904/group/a5df7d81-f7df-4d76-9acf-0d3c0c73649f/events",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a507de8c-fd34-4996-9ad3-c918e9bd26e5",
+			"name": "Add Event Not Found",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f/events",
+			"time": 72,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				72
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a18ecb0a-f5ee-4fe3-9d89-b9fa77487315",
+			"name": "Add Event Different User",
+			"url": "http://localhost:1904/group/c5ab7d81-f7df-4d76-9acf-0d3c0c73649f/events",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9be2b125-ccfe-4d26-944b-fc812d825fa0",
+			"name": "Add Event User 2",
+			"url": "http://localhost:1904/group/c5ab7d81-f7df-4d76-9acf-0d3c0c73649f/events",
+			"time": 67,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				67
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9fef8a28-0bc3-4e82-bb27-0e181fac260d",
+			"name": "Remove Event",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f/events/G5v0Z9Yc3YZz9",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5c6883d1-9523-4733-963d-8bc2d0cd84d7",
+			"name": "Remove Event Not Found",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f/events/G5v0Z9Yc3YZz9",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b56e4a96-6a60-46b9-926e-67fce5881707",
+			"name": "Remove Event Different User",
+			"url": "http://localhost:1904/group/c5ab7d81-f7df-4d76-9acf-0d3c0c73649f/events/G5v0Z9Yc3YZz9",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b61bc9ac-e452-4412-a54c-880c2e3b0fec",
+			"name": "Remove Event User Not Found",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f/events/G5v0Z9Yc3YZz9",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "21876a6c-f487-49fd-8b49-e93079e9ff9e",
+			"name": "Remove Event Group Not Found",
+			"url": "http://localhost:1904/group/a5ab7dac-f7df-4d76-9acf-0d3c0c73649f/events/G5v0Z9Yc3YZz9",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "39b76d8b-d797-4c4e-8910-b936055f8b3d",
+			"name": "Delete Group user 1",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "cefd5422-896c-4412-8bcf-89cc8a2d978a",
+			"name": "Delete Group no Auth",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "bff19877-d84a-4055-b7e5-83b06e246c3a",
+			"name": "Delete Group different user",
+			"url": "http://localhost:1904/group/c5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fc73ad82-7f1a-478f-bf89-8c40af466b18",
+			"name": "Update Group Invalid Auth",
+			"url": "http://localhost:1904/group/c5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "4ff0d3b9-fcc1-4b4d-9502-082624b01379",
+			"name": "Delete Group Invalid ID",
+			"url": "http://localhost:1904/group/c5ab7d81s424f",
+			"time": 2,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "98395d6a-4401-44f9-ae08-14defcaa31dc",
+			"name": "Delete Group Not Found",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c71249f",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d6d01204-6fed-4c80-bd62-e2f724c8f51b",
+			"name": "Delete Group User Not Found",
+			"url": "http://localhost:1904/group/a5ab7d81-f7df-4d76-9acf-0d3c0c71249f",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a7e03e8d-bcec-4b4e-87dd-2a318c09735d",
+			"name": "Delete Group user 2",
+			"url": "http://localhost:1904/group/c5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1444,
+	"collection": {
+		"requests": [
+			{
+				"id": "63fecdea-8afe-4686-8d6e-b6b197071a83",
+				"method": "GET"
+			},
+			{
+				"id": "b086f7c1-101d-45d3-8e1d-97b5226e2b19",
+				"method": "GET"
+			},
+			{
+				"id": "836ca512-28a8-43c5-9a73-f73e79045514",
+				"method": "GET"
+			},
+			{
+				"id": "dfbf49e4-5f1d-417a-9f5f-15a81a720c4b",
+				"method": "GET"
+			},
+			{
+				"id": "3bdefd73-7833-442c-8f39-92289f8f33f2",
+				"method": "GET"
+			},
+			{
+				"id": "7252f1a1-6980-4307-9962-20e208c43daf",
+				"method": "GET"
+			},
+			{
+				"id": "b9636507-67d9-4b0b-97af-785690e9f05b",
+				"method": "GET"
+			},
+			{
+				"id": "774697b5-07a7-440f-b38d-adaec5abb9a1",
+				"method": "GET"
+			},
+			{
+				"id": "e6e649e9-ea4f-4181-894c-2cd51187b1b6",
+				"method": "GET"
+			},
+			{
+				"id": "52b17633-14a8-4ac2-815e-b53f03a101a6",
+				"method": "GET"
+			},
+			{
+				"id": "498712a7-aaf8-46a1-ab09-3fd213f15f5e",
+				"method": "GET"
+			},
+			{
+				"id": "adb7b520-8585-4c55-91d5-b16d095db58a",
+				"method": "POST"
+			},
+			{
+				"id": "6fe0d613-b5f2-4be9-8df0-232758d934cf",
+				"method": "POST"
+			},
+			{
+				"id": "b8508f3e-94df-4b7e-b9cb-bf15628b3e81",
+				"method": "POST"
+			},
+			{
+				"id": "9be8945b-f988-4c5b-a698-1716fa08b166",
+				"method": "POST"
+			},
+			{
+				"id": "2747df04-47d8-488e-befd-59e9116457bc",
+				"method": "POST"
+			},
+			{
+				"id": "ca7bbb06-f7d1-4bd6-8eef-36957dc0af9c",
+				"method": "PUT"
+			},
+			{
+				"id": "5f76c4e2-54df-4a5e-92ba-4fda0a661868",
+				"method": "PUT"
+			},
+			{
+				"id": "1d1577a7-6a8f-40b4-8964-79602bec9f99",
+				"method": "PUT"
+			},
+			{
+				"id": "b43b4be5-f009-4799-ab36-0c23b1ad5367",
+				"method": "PUT"
+			},
+			{
+				"id": "7c30a02a-9efb-4187-b1be-ece105bab54c",
+				"method": "PUT"
+			},
+			{
+				"id": "5ef04c04-ee40-47bb-bc2b-7c202c8d1de6",
+				"method": "PUT"
+			},
+			{
+				"id": "fb527ca1-9c20-4401-a524-5a5847d33384",
+				"method": "PUT"
+			},
+			{
+				"id": "e04e9a5d-4a7f-4494-8281-6d558401faff",
+				"method": "PUT"
+			},
+			{
+				"id": "2c269685-6bf1-4935-91f8-a3c63782e5bd",
+				"method": "GET"
+			},
+			{
+				"id": "acefe01c-5989-4fbf-a696-7f02433fc3a3",
+				"method": "GET"
+			},
+			{
+				"id": "a3bf25a3-8ff4-4cee-86c7-ec3d836a1cd5",
+				"method": "GET"
+			},
+			{
+				"id": "259ac8d3-1207-4714-bc61-46be23244cff",
+				"method": "GET"
+			},
+			{
+				"id": "beba05ad-a2fb-4e57-8e6c-7a35d5dc1719",
+				"method": "GET"
+			},
+			{
+				"id": "6928eca0-3950-4fb5-842f-8d407c60e545",
+				"method": "GET"
+			},
+			{
+				"id": "227aa3cc-865a-4307-99d1-a7359964b205",
+				"method": "GET"
+			},
+			{
+				"id": "f6bed8ff-6387-4c52-9265-bd85e00fc398",
+				"method": "GET"
+			},
+			{
+				"id": "d460eaf0-a69c-49fc-8893-124677a1d72d",
+				"method": "GET"
+			},
+			{
+				"id": "90d7a29f-bf5b-451d-a072-dfc050bdf858",
+				"method": "PUT"
+			},
+			{
+				"id": "4e1ea09e-f749-4380-889b-2827c19d6baa",
+				"method": "PUT"
+			},
+			{
+				"id": "83bff9a8-ee40-4072-84c1-25e5277480d0",
+				"method": "PUT"
+			},
+			{
+				"id": "b750fbdb-a1ed-4fe3-9963-fa646add1c0f",
+				"method": "PUT"
+			},
+			{
+				"id": "a507de8c-fd34-4996-9ad3-c918e9bd26e5",
+				"method": "PUT"
+			},
+			{
+				"id": "a18ecb0a-f5ee-4fe3-9d89-b9fa77487315",
+				"method": "PUT"
+			},
+			{
+				"id": "9be2b125-ccfe-4d26-944b-fc812d825fa0",
+				"method": "PUT"
+			},
+			{
+				"id": "9fef8a28-0bc3-4e82-bb27-0e181fac260d",
+				"method": "DELETE"
+			},
+			{
+				"id": "5c6883d1-9523-4733-963d-8bc2d0cd84d7",
+				"method": "DELETE"
+			},
+			{
+				"id": "b56e4a96-6a60-46b9-926e-67fce5881707",
+				"method": "DELETE"
+			},
+			{
+				"id": "b61bc9ac-e452-4412-a54c-880c2e3b0fec",
+				"method": "DELETE"
+			},
+			{
+				"id": "21876a6c-f487-49fd-8b49-e93079e9ff9e",
+				"method": "DELETE"
+			},
+			{
+				"id": "39b76d8b-d797-4c4e-8910-b936055f8b3d",
+				"method": "DELETE"
+			},
+			{
+				"id": "cefd5422-896c-4412-8bcf-89cc8a2d978a",
+				"method": "DELETE"
+			},
+			{
+				"id": "bff19877-d84a-4055-b7e5-83b06e246c3a",
+				"method": "DELETE"
+			},
+			{
+				"id": "fc73ad82-7f1a-478f-bf89-8c40af466b18",
+				"method": "DELETE"
+			},
+			{
+				"id": "4ff0d3b9-fcc1-4b4d-9502-082624b01379",
+				"method": "DELETE"
+			},
+			{
+				"id": "98395d6a-4401-44f9-ae08-14defcaa31dc",
+				"method": "DELETE"
+			},
+			{
+				"id": "d6d01204-6fed-4c80-bd62-e2f724c8f51b",
+				"method": "DELETE"
+			},
+			{
+				"id": "a7e03e8d-bcec-4b4e-87dd-2a318c09735d",
+				"method": "DELETE"
+			}
+		]
+	}
+}

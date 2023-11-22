@@ -54,7 +54,7 @@ export async function addEvent(group, event) {
 
     const groupToAdd = groups.get(group.id)
 
-    if(getEventIndex(group, event.id) >= 0) throw errors.ALREADY_EXISTS(event, `in ${group.name}`)
+    if(getEventIndex(group, event.id) >= 0) throw errors.ALREADY_EXISTS(event.name, `in ${group.name}`)
 
     groupToAdd.events.push(event)
     return groupToAdd
@@ -81,7 +81,7 @@ export function addUser(user) {
 export function findUser(userToken) {
     const user = users.get(userToken)
     if(user) return user
-    throw errors.NOT_FOUND(`User with token ${userToken}`)
+    throw errors.NOT_FOUND(`User`)
 }
 
 

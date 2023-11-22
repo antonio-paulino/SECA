@@ -300,7 +300,7 @@ paths:
               $ref: "#/components/responses/400BadRequest"
 
     /group/{id}/events:
-        description: resource that represents a Group's events
+        description: Resource that represents a Group's events
         put:
           tags:
             - Groups
@@ -481,7 +481,7 @@ components:
               type: string
               example: 
                 - Invalid ID
-                
+
         NotAuthorized:
           type: string
           example: 
