@@ -8,7 +8,7 @@ before(async () => {
 });
 
 describe('validateUUID function', () => {
-  it('should return false for a valid UUID', () => {
+  it('should return false for invalid UUID', () => {
     const validUUID = '0123456789abcdef0123456789abcdef';
     expect(secaServices.validateUUID(validUUID)).to.be.false;
   });
