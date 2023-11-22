@@ -64,6 +64,7 @@ export function removeEventFromGroup(groupId, eventId, token){
 
 
 function getUserId(userToken) {
+    if(!validateUUID(userToken)) throw errors.INVALID_ARGUMENT(userToken)
     return secaData.findUser(userToken)
 }
 
