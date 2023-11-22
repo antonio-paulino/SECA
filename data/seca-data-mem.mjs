@@ -6,9 +6,9 @@ export let users = new Map
 
 //create users for postman tests
 const user1 = new User('user 1', "e5ab7d81-f7df-4d76-9acf-0d3c0c73649f")
-const user2 = new User('user 2', "e5ab7d81-f7df-4d76-9acf-0d3c0c73439f")
+const user2 = new User('user 2', "g5ab7d81-f7df-4d76-9acf-0d3c0c73439f")
 users.set("e5ab7d81-f7df-4d76-9acf-0d3c0c73649f", user1)
-users.set("e5ab7d81-f7df-4d76-9acf-0d3c0c73439f", user2)
+users.set("g5ab7d81-f7df-4d76-9acf-0d3c0c73439f", user2)
 
 export let groups = new Map
 
@@ -52,6 +52,8 @@ export function getGroups(user) {
 
 export async function addEvent(group, event) {
 
+    console.log(event)
+
     const groupToAdd = groups.get(group.id)
 
     if(getEventIndex(group, event.id) >= 0) throw errors.ALREADY_EXISTS(event, `in ${group.name}`)
@@ -66,6 +68,7 @@ export function deleteGroup(group){
 }
 
 export function addUser(user) {
+    console.log(user)
 
     for(let [token, checkedUser] of users) {
         if(checkedUser.name == user.name) 

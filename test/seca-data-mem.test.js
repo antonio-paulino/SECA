@@ -111,15 +111,46 @@ describe('Group functions test', () => {
     })
     it('deleteGroup function', () => {
 
-        console.log(secaData.groups)
         const group = new secaClasses.Group(groupname, groupdescription, userID, groupID)
 
         secaData.deleteGroup(group)
 
-        console.log(secaData.groups)
-
         expect(secaData.getGroup(group.id)).to.not.exist
-
     
     })
 })
+
+
+
+// using one of the existing users by default
+
+describe('Event functions test', () =>{
+    it('getEventIndex function')
+
+
+
+    it('addEvent function',async () => {
+
+        const localGroupID = 'a5ab7d81-f7df-4d76-9acf-0d3c0c73649f'
+        
+        let event ={
+            id: 'G5dIZ9YmSXKWz',
+            name: 'San Antonio Spurs vs. Phoenix Suns',
+            date: '2024-03-26T00:00:00Z',
+            genre: 'Basketball',
+            segment: 'Sports'
+          }
+        
+        let group = secaData.getGroup(localGroupID)
+        
+        await secaData.addEvent(group,event)
+
+        expect(group.events).to.not.empty
+
+        expect(group.events).to.deep.equal([event])
+
+        
+    })
+
+})
+
