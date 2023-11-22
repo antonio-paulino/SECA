@@ -117,10 +117,7 @@ describe('Group functions test', () => {
 // using one of the existing users by default
 
 describe('Event functions test', () =>{
-    it('getEventIndex function')
-
-
-
+    
     it('addEvent function',async () => {
 
         const localGroupID = 'a5ab7d81-f7df-4d76-9acf-0d3c0c73649f'
@@ -144,5 +141,44 @@ describe('Event functions test', () =>{
         
     })
 
-})
+    it('getEventIndex function - existing event', () =>{
+        const localGroupID = 'a5ab7d81-f7df-4d76-9acf-0d3c0c73649f'
+        const localEvenId = 'G5dIZ9YmSXKWz'
+        let group = secaData.getGroup(localGroupID)
+        expect(secaData.getEventIndex(group, localEvenId)).to.be.equal(0)
 
+    })
+
+    it('removeEvent function - existing event', () =>{
+        const localGroupID = 'a5ab7d81-f7df-4d76-9acf-0d3c0c73649f'
+        const localEvenId = 'G5dIZ9YmSXKWz'
+        let group = secaData.getGroup(localGroupID)
+        secaData.removeEvent(group, localEvenId)
+        expect(group.events).to.be.deep.equal(new Array)
+    })
+
+    //now the event got removed
+
+
+    it('getEventIndex function - non existing event', () =>{
+
+        const localGroupID = 'a5ab7d81-f7df-4d76-9acf-0d3c0c73649f'
+        const localEvenId = 'G5dIZ9YmSXKWz'
+        let group = secaData.getGroup(localGroupID)
+        expect(secaData.getEventIndex(group, localEvenId)).to.be.equal(-1)
+
+    })
+
+    it('removeEvent function - non existing event', () => {
+        const localGroupID = 'a5ab7d81-f7df-4d76-9acf-0d3c0c73649f'
+        const localEvenId = 'G5dIZ9YmSXKWz'
+        let group = secaData.getGroup(localGroupID)
+
+        assert.throws(() => {secaData.removeEvent(group, localEvenId), {code: 3, error: `Event with ${ localEvenId } in group ${group.name} not found` }})
+    
+    })
+
+
+
+
+})
