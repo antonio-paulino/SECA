@@ -68,8 +68,7 @@ export function deleteGroup(group){
 }
 
 export function addUser(user) {
-    console.log(user)
-
+    
     for(let [token, checkedUser] of users) {
         if(checkedUser.name == user.name) 
             throw errors.ALREADY_EXISTS(user.name, 'in users')
@@ -79,6 +78,7 @@ export function addUser(user) {
     users.set(newUser.token, newUser)
     
     return newUser
+
 }
 
 export function findUser(userToken) {

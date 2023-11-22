@@ -1,4 +1,4 @@
-const { expect } = require('chai')
+const { expect, assert } = require('chai')
 
 
 let secaData
@@ -30,6 +30,7 @@ before(async () => {
 
 
 describe('User functions test', () => {
+
     it('addUser function', () => {
       
         const user = new secaClasses.User(username, null);
@@ -42,27 +43,18 @@ describe('User functions test', () => {
 
     });
   
-   /* it('add an existing user', () => {
-        const users = new Map();
-        const username = "asd123";
-        const newUser = new secaClasses.User(username, null);
-  
+    it('add an existing user', () => {
+        
+        const username = "DuplicateTest";
+        
+        const newUser = new secaClasses.User(username);
         const finalUser = secaData.addUser(newUser);
 
-        users.set(finalUser.token, newUser);
-  
-        const otherUser = new secaClasses.User(username, null);
-  
-        const addingDuplicateUser = () => secaData.addUser(otherUser);
-  
-        let caughtError = addingDuplicateUser();
+        const otherUser = new secaClasses.User(username);
         
-        expect(caughtError).to.exist;
+        assert.throws(() => {secaData.addUser(otherUser), {code: 4, error: `DuplicateTest already exists in users`}})
 
-
-        expect(caughtError.code).to.equal(errors.ERROR_CODES.USER_ALREADY_EXISTS);
-        expect(caughtError.description).to.equal(`Username ${otherUser.name} is taken`);
-  });*/
+  })
 
     it('findUser function', () => {
 
