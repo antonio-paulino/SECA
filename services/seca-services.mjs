@@ -79,7 +79,7 @@ function getGroup(groupID, user) {
 }
 
 
-function validateUUID(str) {
+export function validateUUID(str) {
     
     let countNums = 0
     let countSep = 0
