@@ -1,8 +1,8 @@
 #@token = 14d72b99-48f6-48d3-94d3-5a4dcfd96c81
 //@token = 21418bc8-68ba-41ec-9045-036f1a308fde
-@token = 4909d0b3-3be5-4ce8-99cc-8b77c1b01022
+@token = 902ace23-a26c-464e-ba88-a44cd5450c8f
 
-
+### Search events by popularity
 GET  http://localhost:1904/events/popular/?s=5&p=2
 
 ### Search events by name
@@ -35,7 +35,7 @@ Authorization: Bearer {{token}}
 }
 
 ### get group with auth
-GET http://localhost:1904/group/6c6241e4-a6e8-4324-a97c-a7947618a47a
+GET http://localhost:1904/group/53f4fb9a-c05e-494d-b1c9-82ca6ffa03fc
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -43,7 +43,7 @@ Authorization: Bearer {{token}}
 
 
 ### update group with auth
-PUT http://localhost:1904/group/6c6241e4-a6e8-4324-a97c-a7947618a47a
+PUT http://localhost:1904/group/53f4fb9a-c05e-494d-b1c9-82ca6ffa03fc
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -54,7 +54,7 @@ Authorization: Bearer {{token}}
 
 
 ### add event to group
-PUT http://localhost:1904/group/24d54040-f8ba-4624-8d50-aca3e44e55f7/events
+PUT http://localhost:1904/group/53f4fb9a-c05e-494d-b1c9-82ca6ffa03fc/events
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -69,7 +69,7 @@ Authorization: Bearer {{token}}
 
 
 ### Get all groups
-GET http://localhost:1904/group
+GET http://localhost:1904/groups
 Authorization: Bearer {{token}}
 
 ### Delete group

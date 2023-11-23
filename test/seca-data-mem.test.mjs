@@ -21,7 +21,7 @@ let userID = token
 
 
 
-describe('User functions test', () => {
+describe('User - Data functions test', () => {
 
     it('addUser function', () => {
       
@@ -66,7 +66,7 @@ describe('User functions test', () => {
 
 
 
-describe('Group functions test', () => {
+describe('Group - Data functions test', () => {
     it('addGroup function', () => {
 
         const group = new secaClasses.Group(groupname,groupdescription, token)
@@ -110,7 +110,7 @@ describe('Group functions test', () => {
 
 // using one of the existing users by default
 
-describe('Event functions test', () =>{
+describe('Event - Data functions test', () =>{
     
     it('addEvent function',async () => {
 
