@@ -2,7 +2,6 @@ const { expect, assert } = require('chai')
 
 
 let secaData
-
 let secaClasses
 let errors
 

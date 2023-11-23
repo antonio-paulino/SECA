@@ -15,7 +15,7 @@ export async function getEventByID(id) {
     return await getEvent(`https://app.ticketmaster.com/discovery/v2/events/${id}.json?apikey=${API_KEY}`)
 }
 
-async function getEvent(url) {
+async function getEvent(url, tries) {
     const response = await fetch(url)
     if (response.ok) {
 
@@ -37,16 +37,26 @@ async function getEvent(url) {
         return event
 
     } else {
-        throw errors.TICKETMASTER_ERR(response)
+        const attempts = (tries) ? tries : 3
+        if(response.status == 429 && attempts > 0) {
+            await new Promise(resolve => setTimeout(resolve, 1000))
+            return await getEvent(url, attempts - 1)
+        }
+        else throw errors.TICKETMASTER_ERR(response)
     }
 }
 
-async function getEvents(url) {
+async function getEvents(url, tries) {
     const response = await fetch(url)
     if (response.ok) {
         return createEvents(await response.json())
     } else {
-        throw errors.TICKETMASTER_ERR(response)
+        const attempts = (tries) ? tries : 3
+        if(response.status == 429 && attempts > 0) {
+            await new Promise(resolve => setTimeout(resolve, 1000))
+            return await getEvents(url, attempts - 1)
+        }
+        else throw errors.TICKETMASTER_ERR(response)
     }
 }
 
