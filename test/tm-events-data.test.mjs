@@ -1,5 +1,3 @@
-
-
 import {assert, expect} from 'chai'
 import * as errors from '../common/errors.mjs'
 import * as ticketmaster from '../data/tm-events-data.mjs'

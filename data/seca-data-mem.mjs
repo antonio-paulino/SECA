@@ -52,7 +52,7 @@ export function getGroups(user) {
 
 export async function addEvent(group, event) {
 
-    console.log(event)
+    
 
     const groupToAdd = groups.get(group.id)
 

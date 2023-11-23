@@ -1,6 +1,6 @@
-import expect from 'chai'
+import {expect} from 'chai'
 
-import * as secaServices from ('../services/seca-services.mjs');
+import * as secaServices from '../services/seca-services.mjs';
 
 
 describe('validateUUID function', () => {
