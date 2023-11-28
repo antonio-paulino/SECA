@@ -17,6 +17,6 @@ export default function(e) {
         case ERROR_CODES.NOT_AUTHORIZED: return new HttpResponse(401, e)
         case ERROR_CODES.TICKETMASTER_ERR: return new HttpResponse(e.status, e)
         case ERROR_CODES.ARGUMENT_MISSING: return new HttpResponse(400, e)
-        default: return new HttpResponse(500, "Internal server error. Contact your teacher!")
+        default: return new HttpResponse(500, "Internal server error.")
     }
 }
