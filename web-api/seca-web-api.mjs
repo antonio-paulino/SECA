@@ -46,7 +46,7 @@ async function getPopularEventsProcessor(req, res) {
     if(!isValidIndex(p)) throw errors.INVALID_ARGUMENT('p')
 
     const events = await secaServices.getPopularEvents(s, p)
-    return res.status(200).json(events)
+    return res.json(events)
 
 }
 
@@ -63,7 +63,7 @@ async function searchEventProcessor(req, res) {
     if(!isValidIndex(p)) throw errors.INVALID_ARGUMENT('p')
 
     const events = await secaServices.searchEvent(name, s, p)
-    return res.status(200).json(events)
+    return res.json(events)
 
 }
 
@@ -102,7 +102,7 @@ function deleteGroupProcessor(req, res, token) {
 
     secaServices.deleteGroup(req.params.id, token);
 
-    return res.status(200).json();
+    return res.json();
 
 }
 

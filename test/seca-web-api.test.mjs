@@ -6,16 +6,21 @@ import { Group, User } from '../seca-classes.mjs';
 
 
 let groupID 
+let user
 
 
-describe('web-api -> createGroupProcessor', () => {
-    it('should create a group and return it in the response', () => {
-        const user = new User ('web-api Test', "3ac4a280-42be-460c-b6a7-6f008b69cac1")
+
+
+describe('web-api -> Group functions', () => {
+    it('Create User', async () => {
+        
         const req = {
             body: {
-                name: 'Test Group',
-                description: 'This is a test group.',
-            }
+                username: 'web-api Test',
+            },
+            get: (header) => {
+                return undefined
+            },
         };
         
   
@@ -24,21 +29,55 @@ describe('web-api -> createGroupProcessor', () => {
                 expect(statusCode).to.equal(201);
                 return {
                     json: (result) => {
-                        groupID =result.id
+                        expect(result['user-token']).to.be.not.equal(undefined)
+                        user = new User('web-api Test', result['user-token'])
+                    },
+                };
+            },
+        };
+
+        await webAPI.createUser(req, res)
+
+        expect(user.token).to.be.not.equal(undefined)
+
+    }),
+    
+    it('Create Group', async () => {
+        const req = {
+            body: {
+                name: 'Test Group',
+                description: 'This is a test group.',
+            },
+
+            get: (header) => {
+                if (header.toLowerCase() === "authorization") {
+                    return `Bearer ${user.token}`;
+                }
+            },
+        
+        };
+        
+  
+        const res = {
+            status: (statusCode) => {
+                expect(statusCode).to.equal(201);
+                return {
+                    json: (result) => {
+                        groupID = result.id
                         expect(result.id).to.be.not.equal(null)
                         expect(result.userID.token).to.deep.equal(user.token)
                     },
                 };
             },
         };
-        webAPI.createGroupProcessor(req, res, "3ac4a280-42be-460c-b6a7-6f008b69cac1");
-    })
-})
-// On the next test, we will use the group previously created (by testing createGroupProcessor), by using it's id 
-describe('web-api -> updateGroupProcessor', () =>{
-    it('should update a group with the provided data', ()=>{
-        // same user as last test
-        const user = new User ('web-api Test', "3ac4a280-42be-460c-b6a7-6f008b69cac1")
+
+        await webAPI.createGroup(req, res, "e5ab7d81-f7df-4d76-9acf-0d3c0c73649f")
+
+        expect(groupID).to.be.not.equal(undefined)
+    }),
+
+    it('Update Group', async () => {
+
         const req={
             params:{
                 id: groupID
@@ -46,21 +85,38 @@ describe('web-api -> updateGroupProcessor', () =>{
             body: {
                 name: "updateTestWebApi",
                 description: "grupoupdated" 
-            }
+            },
+            get: (header) => {
+                if (header.toLowerCase() === "authorization") {
+                    return `Bearer ${user.token}`;
+                }
+            },
         }
+
         const res = {
             json:(result) => {
-                expect(result.name).to.equal("updateTestWebApi");
-                expect(result.description).to.equal("grupoupdated");
+                expect(result.name).to.equal("updateTestWebApi")
+                expect(result.description).to.equal("grupoupdated")
+                expect(result.userID.token).to.deep.equal(user.token)
             }
         }
-        webAPI.updateGroupProcessor(req,res,user.token)
+
+        await webAPI.updateGroup(req,res,user.token)
+
     })
-})
-describe('web-api -> getAllGroupsProcessor', () =>{
-    it('should get all groups from a single user', () =>{
-        // 'web-api Test' user will only have one group
-        const user = new User ('web-api Test', "3ac4a280-42be-460c-b6a7-6f008b69cac1")
+
+    it('Get all groups', async () => {
+    
+        const req = {
+
+            get: (header) => {
+                if (header.toLowerCase() === "authorization") {
+                    return `Bearer ${user.token}`;
+                }
+            },
+
+        }
+
         const expectedGroup = new Group('updateTestWebApi','groupoupdated',user.token,groupID)
         
         const res = {
@@ -69,40 +125,56 @@ describe('web-api -> getAllGroupsProcessor', () =>{
                 expect(result.lenght == 1)
             }
         }
-        webAPI.getAllGroupsProcessor(null,res,user.token)
-    })
-})
-describe('web-api -> getGroupProcessor', () => {
-    it('should retrieve a group and return it in the response', () => {
-        const user = new User ('web-api Test', "3ac4a280-42be-460c-b6a7-6f008b69cac1")
-        const expectedGroup = new Group('updateTestWebApi','groupoupdated',user.token,groupID)
+
+        await webAPI.getAllGroups(req,res,user.token)
+
+    }),
+
+    it('Get Group', async () => {
+
+        const expectedGroup = new Group('updateTestWebApi','groupoupdated',user.token, groupID)
+
         const req = {
             params: {
-              id: groupID,
+                id: groupID,
             },
-        }
-    
+            get: (header) => {
+                if (header.toLowerCase() === "authorization") {
+                    return `Bearer ${user.token}`;
+                }
+            },
+            
+        };
+
         const res = {
             json: (result) => {
                 expect(result.id).to.deep.equal(expectedGroup.id)
                 expect(result.userID).to.deep.equal(user)
-          },
+            },
         }
-        webAPI.getGroupProcessor(req, res, user.token);
+
+        await webAPI.getGroup(req, res, user.token)
+        
     })
-})
 
+    it('Add Event to group', async () => {
 
-describe('web-api -> addToGroupProcessor', () => {
-    it('should add an event to a group and return the updated group in the response', async () => {
-        const user = new User ('web-api Test', "3ac4a280-42be-460c-b6a7-6f008b69cac1")
         const req = {
+
             params: {
                 id: groupID, 
             },
+
             body: {
                 id: 'G5dIZ9YmSXKWz', 
             },
+
+            get: (header) => {
+                if (header.toLowerCase() === "authorization") {
+                    return `Bearer ${user.token}`;
+                }
+            },
+        
         };
 
         let event ={
@@ -113,26 +185,32 @@ describe('web-api -> addToGroupProcessor', () => {
             segment: 'Sports'
         }
 
-  
+
         const res = {
             json: (result) => { 
                 expect(event in result.events)
             },
         };
-        await webAPI.addToGroupProcessor(req,res, user.token)
+
+        await webAPI.addToGroup(req, res, user.token)
 
     })
-})
 
+    it('Remove Event From Group', async () => {
 
-describe('web-api -> removeFromGroupProcessor', () => {
-    it('should remove an event from a group and return the updated group in the response', () => {
-        const user = new User ('web-api Test', "3ac4a280-42be-460c-b6a7-6f008b69cac1")
         const req = {
+
             params: {
-                groupID: groupID, // Replace with a valid group ID for your test case
-                eventID: 'G5dIZ9YmSXKWz', // Replace with a valid event ID for your test case
+                groupID: groupID, 
+                eventID: 'G5dIZ9YmSXKWz', 
             },
+
+            get: (header) => {
+                if (header.toLowerCase() === "authorization") {
+                    return `Bearer ${user.token}`;
+                }
+            },
+
         };
 
         let event ={
@@ -142,48 +220,66 @@ describe('web-api -> removeFromGroupProcessor', () => {
             genre: 'Basketball',
             segment: 'Sports'
         }
-  
+
         const res = {
             json: (result) => {
                 expect(result.events).to.not.include(event)
             },
         };
-        webAPI.removeFromGroupProcessor(req,res,user.token);
-
+        
+        await webAPI.removeFromGroup(req,res,user.token)
+                
     })
-})
-describe('web-api -> deleteGroupProcessor', () => {
-    it('should delete a group and return a 200 status in the response', () => {
-        const user = new User ('web-api Test', "3ac4a280-42be-460c-b6a7-6f008b69cac1")
+
+    it('Delete Group', async () => {
+
         const req = {
             params: {
-                id: groupID, // Replace with a valid group ID for your test case
+                id: groupID, 
+            },
+
+            get: (header) => {
+                if (header.toLowerCase() === "authorization") {
+                    return `Bearer ${user.token}`;
+                }
             },
         };
+
         const removedGroup = new Group('updateTestWebApi', 'grupoupdated',user,groupID)
 
         let groups
         
         const res = {
-            status: (statusCode) => {
-                expect(statusCode).to.equal(200);
-                return {
-                    json: () => {
+                json: () => {
                         
-                    },
-                };
-            },
+                },
         };
-        webAPI.deleteGroupProcessor(req,res,user.token);
+
+        await webAPI.deleteGroup(req,res,user.token);
+
+        const reqGetGroups = {
+
+            get: (header) => {
+                if (header.toLowerCase() === "authorization") {
+                    return `Bearer ${user.token}`;
+                }
+            },
+
+        }
 
         const resGetGroups = {
             json:(result) =>{
                 groups = result
             }
         }
+
         
-        webAPI.getAllGroupsProcessor(null,resGetGroups,user.token)
+        await webAPI.getAllGroups(reqGetGroups,resGetGroups,user.token)
+
         expect(groups).to.not.include(removedGroup)
 
     })
+    
 })
+
+

@@ -63,13 +63,13 @@ export function removeEventFromGroup(groupId, eventId, token){
 }
 
 
-function getUserId(userToken) {
+export function getUserId(userToken) {
     if(!validateUUID(userToken)) throw errors.INVALID_ARGUMENT(userToken)
     return secaData.findUser(userToken)
 }
 
 
-function getGroup(groupID, user) {
+export function getGroup(groupID, user) {
 
     if(!validateUUID(groupID)) throw errors.INVALID_ARGUMENT(groupID)
     const group = secaData.getGroup(groupID)

@@ -23,19 +23,20 @@ describe('validateUUID function', () => {
 describe ('Group - services functions', () => {
 
   it('should create a group successfully', () => {
-    // Arrange
-    const newGroup = {
-        name: 'Test Group',
-        description: 'Test Description'
-    };
-    const userToken = 'e5ab7d81-f7df-4d76-9acf-0d3c0c73649f';
 
-    // Act
-    const createdGroup = secaServices.createGroup(newGroup, userToken);
-    groupID = createdGroup.id
-    expect(createdGroup.id).to.not.equal(null);
-    
-});
+      const newGroup = {
+          name: 'Test Group',
+          description: 'Test Description'
+      };
+
+      const userToken = 'e5ab7d81-f7df-4d76-9acf-0d3c0c73649f';
+
+
+      const createdGroup = secaServices.createGroup(newGroup, userToken);
+      groupID = createdGroup.id
+      expect(createdGroup.id).to.not.equal(null);
+      
+  });
 
 
   it('getGroup function', () => {
@@ -108,7 +109,6 @@ describe ('Group - services functions', () => {
       segment: 'Sports'
     }
     const user = new User ('user 1', "e5ab7d81-f7df-4d76-9acf-0d3c0c73649f")
-    // Using the same user like the tests before. At this point the user has one group and one event on it. 
     const returnedGroup = secaServices.removeEventFromGroup(groupID, event.id,user.token)
     
     expect(returnedGroup.events).to.not.include(event)

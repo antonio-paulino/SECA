@@ -31,6 +31,7 @@ export function updateGroup(newGroup) {
 export function removeEvent(group, eventID) {
 
     const groupToRemove = groups.get(group.id)
+ 
     const eventIdx = getEventIndex(group, eventID) 
 
     if(eventIdx == -1) throw errors.NOT_FOUND(`Event with id ${eventID} in group ${group.name}`)
@@ -52,13 +53,12 @@ export function getGroups(user) {
 
 export async function addEvent(group, event) {
 
-    
-
     const groupToAdd = groups.get(group.id)
 
     if(getEventIndex(group, event.id) >= 0) throw errors.ALREADY_EXISTS(event.name, `in ${group.name}`)
 
     groupToAdd.events.push(event)
+
     return groupToAdd
 
 }
