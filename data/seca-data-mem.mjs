@@ -6,10 +6,9 @@ export let users = new Map
 
 //create users for postman tests
 const user1 = new User('user 1', "e5ab7d81-f7df-4d76-9acf-0d3c0c73649f")
-const user2 = new User('user 2', "g5ab7d81-f7df-4d76-9acf-0d3c0c73439f")
+const user2 = new User('user 2', "d5ab7d81-f7df-4d76-9acf-0d3c0c73439f")
 users.set("e5ab7d81-f7df-4d76-9acf-0d3c0c73649f", user1)
-users.set("g5ab7d81-f7df-4d76-9acf-0d3c0c73439f", user2)
-
+users.set("d5ab7d81-f7df-4d76-9acf-0d3c0c73439f", user2)
 export let groups = new Map
 
 groups.set("a5ab7d81-f7df-4d76-9acf-0d3c0c73649f", new Group("Test group user 1", "This is a test group that belongs to user 1", user1, "a5ab7d81-f7df-4d76-9acf-0d3c0c73649f"))

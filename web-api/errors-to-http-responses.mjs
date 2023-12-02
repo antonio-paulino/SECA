@@ -9,7 +9,6 @@ function HttpResponse(status, e) {
 }
 
 export default function(e) {
-    console.log(e)
     switch(e.code) {
         case ERROR_CODES.INVALID_ARGUMENT: return new HttpResponse(400, e)
         case ERROR_CODES.INVALID_BODY: return new HttpResponse(400, e)

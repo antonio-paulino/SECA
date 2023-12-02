@@ -371,14 +371,14 @@
 					"name": "Create Group",
 					"item": [
 						{
-							"name": "Create Group user 2",
+							"name": "Create Group user 1",
 							"request": {
 								"auth": {
 									"type": "bearer",
 									"bearer": [
 										{
 											"key": "token",
-											"value": "e5ab7d81-f7df-4d76-9acf-0d3c0c73439f",
+											"value": "e5ab7d81-f7df-4d76-9acf-0d3c0c73649f",
 											"type": "string"
 										}
 									]
@@ -492,6 +492,44 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"name\": \"Update test\",\r\n    \"description\": \"This is an update test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1904/groups",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1904",
+									"path": [
+										"groups"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Group User 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "d5ab7d81-f7df-4d76-9acf-0d3c0c73439f",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Test Group 2\",\r\n    \"description\": \"This is a test group\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -869,7 +907,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "e5ab7d81-f7df-4d76-9acf-0d3c0c73439f",
+											"value": "d5ab7d81-f7df-4d76-9acf-0d3c0c73439f",
 											"type": "string"
 										}
 									]
@@ -962,7 +1000,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "e5ab7d81-f7df-4d76-9acf-0d3c0c73439f",
+											"value": "d5ab7d81-f7df-4d76-9acf-0d3c0c73439f",
 											"type": "string"
 										}
 									]
@@ -1369,7 +1407,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "e5ab7d81-f7df-4d76-9acf-0d3c0c73439f",
+											"value": "d5ab7d81-f7df-4d76-9acf-0d3c0c73439f",
 											"type": "string"
 										}
 									]
@@ -1877,7 +1915,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "e5ab7d81-f7df-4d76-9acf-0d3c0c73439f",
+											"value": "d5ab7d81-f7df-4d76-9acf-0d3c0c73439f",
 											"type": "string"
 										}
 									]
