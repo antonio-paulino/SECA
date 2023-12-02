@@ -37,22 +37,22 @@ describe('User - Data functions test', () => {
   
     it('add an existing user', () => {
         
-        const username = "DuplicateTest";
+        const username = "DuplicateTest"
         
-        const newUser = new secaClasses.User(username);
-        const finalUser = secaData.addUser(newUser);
+        const newUser = new secaClasses.User(username)
+        secaData.addUser(newUser)
 
-        const otherUser = new secaClasses.User(username);
+        const otherUser = new secaClasses.User(username)
         
         assert.throws(() => {secaData.addUser(otherUser), {code: 4, error: `DuplicateTest already exists in users`}})
 
-  })
+    })
 
     it('findUser function', () => {
 
-        const user = new secaClasses.User(username , token);
+        const user = new secaClasses.User(username , token)
   
-        const foundUser = secaData.findUser(user.token);
+        const foundUser = secaData.findUser(user.token)
 
         userID = foundUser.token
         
