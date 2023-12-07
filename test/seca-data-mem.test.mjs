@@ -3,7 +3,6 @@ import { expect, assert } from 'chai'
 
 import * as secaData from '../data/seca-data-mem.mjs'
 import * as secaClasses from '../seca-classes.mjs'
-import * as errors from '../common/errors.mjs'
 
 
 
@@ -21,7 +20,7 @@ let userID = token
 
 
 
-describe('User - Data functions test', () => {
+describe('User - Memory Data functions test', () => {
 
     it('addUser function', () => {
       
@@ -66,7 +65,7 @@ describe('User - Data functions test', () => {
 
 
 
-describe('Group - Data functions test', () => {
+describe('Group - Memory Data functions test', () => {
     it('addGroup function', () => {
 
         const group = new secaClasses.Group(groupname,groupdescription, token)
@@ -110,7 +109,7 @@ describe('Group - Data functions test', () => {
 
 // using one of the existing users by default
 
-describe('Event - Data functions test', () =>{
+describe('Event - Memory Data functions test', () =>{
     
     it('addEvent function',async () => {
 

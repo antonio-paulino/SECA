@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-left:
+  }
+  
+  nav {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+  }
+  
+  header {
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .events {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+    }
+
+  .group {
+    margin-top: 50px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff; 
+  }
+
+  .search-container {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .group-name {
+    margin-left: 5px;
+    color: #333;
+  }
+  
+  .group-description {
+    margin-left: 10px;
+    color: #666;
+  }
+  
+  .eventDetails {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .pagination {
+    margin: 10px;
+  }
+
+  .bottom-buttons {
+    margin: 5px;
+    display: inline-flex;
+  }
+  
+  .event {
+    width: 400px; 
+    margin: 10px; 
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .pagination a {
+    padding: 5px 10px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    margin-right: 5px;
+  }
+
+  select {
+    width: 50%;
+    padding: 16px 20px;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+  }
+  
+  .groups-header {
+    margin-left: 20px;
+  }
+
+  .pagination a:hover {
+    background-color: #555;
+  }
+  
+  img {
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+  }
+
+  button,
+  input[type="submit"],
+  a {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin: 5px;
+ }
+
+ .error-message {
+    color: red;
+    size: 50%;
+ }
+
+  a:hover {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}

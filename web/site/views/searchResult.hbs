@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/site/css"/>
+  <nav>
+    <a href="/site/home">Home</a>
+    <a href="/site/search">Search Events</a>
+    <a href="/site/groups">Groups</a>
+  </nav>
+</head>
+<body>
+
+{{#if group}}
+    <div class="events">
+      {{#each events}}
+        <div class="event">
+          <input type="checkbox" class="event-check" name="selectedEvent" value="{{id}}">
+          <h2>{{name}}</h2>
+          {{#if date}}
+            <p>Date: {{date}}</p>
+          {{/if}}
+          {{#if genre}}
+            <p>Genre: {{genre}}</p>
+          {{/if}}
+          {{#if segment}}
+            <p>Segment: {{segment}}</p>
+          {{/if}}
+          <form id="nameForm" action="/site/event" method="GET">
+            <input type="hidden" name="id" value="{{id}}">
+            <input type="submit"  value="More Details...">
+          </form>
+        </div>
+      {{/each}}
+  </div>
+    <div class="bottom-buttons">
+        <button onclick="addSelectedEvents('{{group.id}}')">Add Selected Events (Repeat Events will not be added)</button>
+    </div>
+  
+
+{{else}}
+  <div class="events">
+    {{#each events}}
+      <div class="event">
+        <h2>{{name}}</h2>
+        {{#if date}}
+          <p>Date: {{date}}</p>
+        {{/if}}
+        {{#if genre}}
+          <p>Genre: {{genre}}</p>
+        {{/if}}
+        {{#if segment}}
+          <p>Segment: {{segment}}</p>
+        {{/if}}
+        <form id="nameForm" action="/site/event" method="GET">
+          <input type="hidden" name="id" value="{{id}}">
+          <input type="submit" value="More Details...">
+        </form>
+      </div>
+    {{/each}}
+
+  </div>
+{{/if}}
+
+    <div class="pagination">
+
+        {{#if (calculatePagination 'previous' size page)}}
+            <a href="#" onclick="getUrl('previous', {{size}}, {{page}}, '{{path}}', '{{name}}')">Previous Page</a>
+        {{/if}}
+
+        {{#if (calculatePagination 'next' size page)}}
+            <a href="#" onclick="getUrl('next', {{size}}, {{page}}, '{{path}}','{{name}}')">Next Page</a>
+        {{/if}}
+
+    </div>
+
+
+<script>
+    
+    async function addSelectedEvents(groupID) {
+    var checkboxes = document.querySelectorAll('input[name="selectedEvent"]:checked');
+    var promises = [];
+
+    checkboxes.forEach(function (checkbox) {
+        promises.push(
+        fetch(`/site/groups/${groupID}/events/add`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: checkbox.value }),
+        })
+        );
+    });
+
+    await Promise.all(promises);
+    window.location.href = `/site/groups/{{group.id}}/`;
+ 
+    }
+
+  function getUrl(type, size, page, path, name) {
+    let pageNum = parseInt(page)
+    let url = (type == 'previous') ? `${path}?s=${size}&p=${pageNum - 1}` : `${path}?s=${size}&p=${pageNum + 1}`;
+    if(name) url = `${url}&name=${name}`
+    window.location.href = url
+  }
+
+</script>
+
+</body>
+</html>
+

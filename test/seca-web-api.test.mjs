@@ -1,14 +1,19 @@
 import {expect} from 'chai'
+import * as secaData from '../data/seca-data-elastic.mjs'
+import * as ticketMaster from '../data/tm-events-data.mjs'
+import secaServicesInit from '../services/seca-services.mjs'
+import secaApiInit from '../web/api/seca-web-api.mjs'
 
-import * as webAPI from '../web-api/seca-web-api.mjs';
+
+const secaServices = secaServicesInit(secaData, ticketMaster)
+const webAPI = secaApiInit(secaServices)
+
 
 import { Group, User } from '../seca-classes.mjs';
 
 
 let groupID 
 let user
-
-
 
 
 describe('web-api -> Group functions', () => {
@@ -30,7 +35,7 @@ describe('web-api -> Group functions', () => {
                 return {
                     json: (result) => {
                         expect(result['user-token']).to.be.not.equal(undefined)
-                        user = new User('web-api Test', result['user-token'])
+                        user = new User('web-api Test', result['user-token'], result.id)
                     },
                 };
             },
@@ -63,6 +68,7 @@ describe('web-api -> Group functions', () => {
                 expect(statusCode).to.equal(201);
                 return {
                     json: (result) => {
+                        user.id = result.userID.id
                         groupID = result.id
                         expect(result.id).to.be.not.equal(null)
                         expect(result.userID.token).to.deep.equal(user.token)
@@ -132,7 +138,7 @@ describe('web-api -> Group functions', () => {
 
     it('Get Group', async () => {
 
-        const expectedGroup = new Group('updateTestWebApi','groupoupdated',user.token, groupID)
+        const expectedGroup = new Group('updateTestWebApi','groupoupdated', user.token, groupID)
 
         const req = {
             params: {

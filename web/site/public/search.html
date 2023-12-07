@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Search for Events</title>
+  <link rel="stylesheet" type="text/css" href="/site/css"/>
+</head>
+<body>
+
+<nav>
+  <a href="/site/home">Home</a>
+  <a href="/site/search">Search Events</a>
+  <a href="/site/groups">Groups</a>
+</nav>
+
+<div class="search-container">
+    <select onchange="showForm(this.value)">
+    <option value="popular">Search Popular Events</option>
+    <option value="name">Search Event by Name</option>
+    </select>
+
+    <form id="popularForm" action="search/popular" method="GET" onsubmit="return validateForm('popularForm')">
+        <p><input type="text" placeholder="Number of results by page" name="s" value="30"></p>
+        <p><input type="text" placeholder="Result page number" name="p" value="1"></p>
+        <input type="submit" value="Search Events">
+    </form>
+    
+    <form id="nameForm" action="search/name" method="GET" style="display:none;" onsubmit="return validateForm('nameForm')">
+        <p><input type="text" placeholder="Number of results by page" name="s" value="30"></p>
+        <p><input type="text" placeholder="Result page number" name="p" value="1"></p>
+        <p><input type="text" placeholder="Name of event" name="name"></p>
+        <input type="submit" value="Search Events">
+    </form>
+    
+    <div class="error-message" id="errorMessage"></div>
+</div>
+
+<script>
+
+  function showForm(formType) {
+    var popularForm = document.getElementById("popularForm");
+    var nameForm = document.getElementById("nameForm");
+
+    if (formType === "popular") {
+      popularForm.style.display = "block";
+      nameForm.style.display = "none";
+    } else if (formType === "name") {
+      popularForm.style.display = "none";
+      nameForm.style.display = "block";
+    }
+  }
+
+  function validateForm(formId) {
+
+    var form = document.getElementById(formId);
+
+    var s = parseInt(form.querySelector('input[name="s"]').value);
+    var p = parseInt(form.querySelector('input[name="p"]').value);
+
+    var maxResults = 1000;
+
+    var errorMessage = document.getElementById("errorMessage");
+
+    if(formId == 'nameForm') {
+        var name = form.querySelector('input[name="name"]').value
+        if(!name) {
+            errorMessage.textContent = `No name provided`;
+            errorMessage.style.display = "block";
+            return false
+        }
+    }
+    
+    if(isNaN(s) || s > 200) {
+        errorMessage.textContent = `Invalid values. Maximum number of results per page is 200`;
+        errorMessage.style.display = "block";
+        return false;
+    }
+
+    if (isNaN(s) || isNaN(p) || s * p >= maxResults) {
+      errorMessage.textContent = `Invalid values. Maximum number of results is ${maxResults}`;
+      errorMessage.style.display = "block";
+      return false;
+    }
+
+    errorMessage.style.display = "none";
+    return true;
+  }
+</script>
+
+</body>
+</html>

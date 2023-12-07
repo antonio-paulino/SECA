@@ -92,19 +92,15 @@ export function getGroup(id) {
 }
 
 
+
 export function getEventIndex(group, eventID) {
 
-    let idx = -1
-    let count = 0
-
-    group.events.forEach(event => {
-        if (event.id == eventID) {
-            idx = count
-            return idx
+    for (let i = 0; i < group.events.length; i++) {
+        if (group.events[i].id === eventID) {
+            return i 
         }
-        count++
-    });
-
-    return idx
-
+    }
+    
+    return -1
+    
 }

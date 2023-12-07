@@ -10,8 +10,9 @@ export class Group {
 }
 
 export class User {
-    constructor(username, token) {
+    constructor(username, token, id) {
         this.name = username
         this.token = token || null
+        this.id = id || null
     }
 }
