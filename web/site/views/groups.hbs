@@ -7,6 +7,7 @@
 </head>
 <body>
 
+
 <nav>
     <a href="/site/home">Home</a>
     <a href="/site/search">Search Events</a>
@@ -15,21 +16,23 @@
 
 
 <header>
-    <h1>Add a New Group</h1>
-    <form id="addGroup" class="addgroup-form" action="groups/add" method="POST", onsubmit="return validateGroupForm('addGroup')">
-            <p></p>
-            <input type="text" placeholder="Group name here.." name="name">
-            <p></p>
-            <input type="text" placeholder="Group description here.." name="description">
-            <p></p>
-            <div class="error-message" id="errorMessage"></div>
-            <p></p>
-            <input type="submit" value="Add Group">
-    </form>
-
-
+  <h1>Add a New Group</h1>
+  <form id="addGroup" class="addgroup-form" action="groups/add" method="POST", onsubmit="return validateGroupForm('addGroup')">
+          <p></p>
+          <input type="text" placeholder="Group name here.." name="name">
+          <p></p>
+          <input type="text" placeholder="Group description here.." name="description">
+          <p></p>
+          <div class="error-message" id="errorMessage"></div>
+          <p></p>
+          <input type="submit" value="Add Group">
+  </form>
 
 </header>
+
+
+
+
 
 {{#if groups.length}}
 <div class="groups">
@@ -98,44 +101,8 @@
 </div>
 {{/if}}
 
+<script src="/site/scripts"></script>
 
-<script>
-
-  function validateGroupForm(formID, groupID) {
-    
-    var form = (formID == `editGroup`) ? document.getElementById(`editGroup${groupID}`) : document.getElementById(formID);
-
-    var groupName = form.querySelector('input[name="name"]').value;
-    var groupDescription = form.querySelector('input[name="description"]').value;
-
-    var errorMessage = (formID == `editGroup`) ? document.getElementById(`errorMessage${groupID}`) : document.getElementById(`errorMessage`);
-
-    if (groupName.trim() == '' || groupDescription.trim() == '') {
-        errorMessage.textContent = `You must provide both Group Name and Description`;
-        errorMessage.style.display = "block";
-        return false;
-    }
-    errorMessage.style.display = 'none';
-    return true;
-  }
-
-
-  function toggleEditForm(groupId) {
-    var groupDetails = document.getElementById(`group${groupId}`);
-    var groupName = groupDetails.querySelector('.group-name');
-    var groupDescription = groupDetails.querySelector('.group-description');
-    var editForm = document.getElementById(`editGroup${groupId}`);
-    var editButton = groupDetails.querySelector('button');
-    
-
-    editButton.style.display = 'none';
-
-    groupName.style.display = groupName.style.display === 'none' ? 'block' : 'none';
-    groupDescription.style.display = groupDescription.style.display === 'none' ? 'block' : 'none';
-    editForm.style.display = editForm.style.display === 'none' ? 'block' : 'none';
-  }
-
-</script>
 
 </body>
 </html>

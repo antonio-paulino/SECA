@@ -80,11 +80,14 @@ function getEventDetails(eventDetails, detailed) {
     }
 
     if(detailed) {
+        
         event.timezone = eventDetails.dates.timezone
 
-        if(eventDetails.classifications[0].subGenre)
-            event.subGenre = eventDetails.classifications[0].subGenre.name
-
+        if (eventDetails.classifications) {
+            if(eventDetails.classifications[0].subGenre)
+                event.subGenre = eventDetails.classifications[0].subGenre.name
+        }
+        
         if(eventDetails.images) 
             event.image = eventDetails.images[0].url
 

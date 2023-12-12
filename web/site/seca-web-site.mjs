@@ -21,6 +21,7 @@ export default function(secaServices) {
             getMoreDetails : processRequest(getEventDetails),
             getSearch : processRequest(getSearchPage),
             getHome : processRequest(getHomePage),
+            getScripts : processRequest(getScripts),
             getCss : processRequest(getCss),
             groupSearchEventsPopular : processRequest(getPopularEventsProcessor, true),
             groupSearchEvents : processRequest(searchEventProcessor, true)
@@ -45,6 +46,10 @@ export default function(secaServices) {
                     rsp.status(rspError.status).render('error', {error: rspError})
                 }
             }
+        }
+
+        function getScripts(req, res) {
+            sendFile('scripts.js', '.', res)
         }
 
         async function getCss(req, res) {

@@ -84,6 +84,9 @@ app.post('/site/groups/:id/events/delete', secaSite.removeFromGroup)
 // Get site css
 app.get('/site/css', secaSite.getCss)
 
+// Get site page scripts
+app.get('/site/scripts', secaSite.getScripts)
+
 
 // API ROUTES
 

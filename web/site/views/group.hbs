@@ -24,7 +24,7 @@
     <option value="name">Search Event by Name</option>
     </select>
 
-    <form id="popularForm" action="events/search/popular" method="GET" onsubmit="return validateForm('popularForm   ')">
+    <form id="popularForm" action="events/search/popular" method="GET" onsubmit="return validateForm('popularForm')">
         <p><input type="text" placeholder="Number of results by page" name="s" value="30"></p>
         <p><input type="text" placeholder="Result page number" name="p" value="1"></p>
         <input type="submit" value="Search Events">
@@ -80,57 +80,6 @@
     </div>  
 </body> 
 
-    <script>
-        function showForm(formType) {
-            var popularForm = document.getElementById("popularForm");
-            var nameForm = document.getElementById("nameForm");
-
-            if (formType === "popular") {
-                popularForm.style.display = "block";
-                nameForm.style.display = "none";
-            } else if (formType === "name") {
-                popularForm.style.display = "none";
-                nameForm.style.display = "block";
-            }
-        }
-
-
-        function validateForm(formId) {
-
-        var form = document.getElementById(formId);
-
-        var s = parseInt(form.querySelector('input[name="s"]').value);
-        var p = parseInt(form.querySelector('input[name="p"]').value);
-
-        var maxResults = 1000;
-        var maxResultsPerPage = 200;
-
-        var errorMessage = document.getElementById("errorMessage");
-
-        if(isNaN(s) || s > maxResultsPerPage) {
-            errorMessage.textContent = `Invalid values. Maximum number of results per page is ${maxResultsPerPage}`;
-            errorMessage.style.display = "block";
-            return false;
-        }
-
-        if(formId == 'nameForm') {
-            var name = form.querySelector('input[name="name"]').value
-            if(!name) {
-                errorMessage.textContent = `No name provided`;
-                errorMessage.style.display = "block";
-                return false
-            }
-        }
-
-        if (isNaN(s) || isNaN(p) || s * p >= maxResults) {
-            errorMessage.textContent = `Invalid values. Maximum number of results is ${maxResults}`;
-            errorMessage.style.display = "block";
-            return false;
-        }
-
-        errorMessage.style.display = "none";
-        return true;
-    }
-    </script>
+<script src="/site/scripts"></script>
 
 </html>

@@ -16,7 +16,7 @@
     <div class="events">
       {{#each events}}
         <div class="event">
-          <input type="checkbox" class="event-check" name="selectedEvent" value="{{id}}">
+          <input type="checkbox" class="checkmark" name="selectedEvent" value="{{id}}">
           <h2>{{name}}</h2>
           {{#if date}}
             <p>Date: {{date}}</p>
@@ -27,10 +27,12 @@
           {{#if segment}}
             <p>Segment: {{segment}}</p>
           {{/if}}
+          <div class="bottom-buttons">
           <form id="nameForm" action="/site/event" method="GET">
             <input type="hidden" name="id" value="{{id}}">
             <input type="submit"  value="More Details...">
           </form>
+          </div>
         </div>
       {{/each}}
   </div>
@@ -76,37 +78,7 @@
     </div>
 
 
-<script>
-    
-    async function addSelectedEvents(groupID) {
-    var checkboxes = document.querySelectorAll('input[name="selectedEvent"]:checked');
-    var promises = [];
-
-    checkboxes.forEach(function (checkbox) {
-        promises.push(
-        fetch(`/site/groups/${groupID}/events/add`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: checkbox.value }),
-        })
-        );
-    });
-
-    await Promise.all(promises);
-    window.location.href = `/site/groups/{{group.id}}/`;
- 
-    }
-
-  function getUrl(type, size, page, path, name) {
-    let pageNum = parseInt(page)
-    let url = (type == 'previous') ? `${path}?s=${size}&p=${pageNum - 1}` : `${path}?s=${size}&p=${pageNum + 1}`;
-    if(name) url = `${url}&name=${name}`
-    window.location.href = url
-  }
-
-</script>
+<script src="/site/scripts"></script>
 
 </body>
 </html>
