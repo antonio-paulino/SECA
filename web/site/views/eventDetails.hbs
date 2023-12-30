@@ -1,41 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-     <link rel="stylesheet" type="text/css" href="/site/css"/>
-     <title>Event Details</title>
-</head>
-<body>
-    <nav>
-        <a href="/site/home">Home</a>
-        <a href="/site/search">Search Events</a>
-        <a href="/site/groups">Groups</a>
-    </nav>
+
+<title>SECA - Events</title>
 
 
-    <div class="eventDetails">
-        {{#if image}}
-            <img src={{image}} alt={{name}}>
-        {{/if}}
-        {{#if name}}
-            <h2>{{name}}</h2>
-        {{/if}}
-        {{#if salesStartTime}}
-            <p>Sales Start Time: {{salesStartTime}}</p>
-        {{/if}}
-        {{#if salesEndTime}}
-            <p>Sales End Time: {{salesEndTime}}</p>
-        {{/if}}
-        {{#if genre}}
-            <p>Genre: {{genre}}</p>
-        {{/if}}
-        {{#if segment}}
-            <p>Segment: {{segment}}</p>
-        {{/if}}
-        {{#if subGenre}}
-            <p>Subgenre: {{subGenre}}</p>
-        {{/if}}
-    </div>
-    
-    <button onclick="history.back()">Go Back</button>
+<div class="eventDetails">
+    {{#if image}}
+        <img src={{image}} alt={{name}}>
+    {{/if}}
+    {{#if name}}
+        <h2>{{name}}</h2>
+    {{/if}}
+    {{#if salesStartTime}}
+        <p>Sales Start Time: {{salesStartTime}}</p>
+    {{/if}}
+    {{#if salesEndTime}}
+        <p>Sales End Time: {{salesEndTime}}</p>
+    {{/if}}
+    {{#if genre}}
+        <p>Genre: {{genre}}</p>
+    {{/if}}
+    {{#if segment}}
+        <p>Segment: {{segment}}</p>
+    {{/if}}
+    {{#if subGenre}}
+        <p>Subgenre: {{subGenre}}</p>
+    {{/if}}
+</div>
 
-</body>
+<button onclick="history.back()">Go Back</button>
+

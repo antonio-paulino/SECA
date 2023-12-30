@@ -1,0 +1,19 @@
+   <div class="event">
+          <input type="checkbox" class="checkmark" name="selectedEvent" value="{{id}}">
+          <h2>{{name}}</h2>
+          {{#if date}}
+            <p>Date: {{date}}</p>
+          {{/if}}
+          {{#if genre}}
+            <p>Genre: {{genre}}</p>
+          {{/if}}
+          {{#if segment}}
+            <p>Segment: {{segment}}</p>
+          {{/if}}
+          <div class="bottom-buttons">
+          <form id="nameForm" action="/site/event" method="GET">
+            <input type="hidden" name="id" value="{{id}}">
+            <input type="submit"  value="More Details...">
+          </form>
+          </div>
+</div>

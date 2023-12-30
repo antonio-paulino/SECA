@@ -1,8 +1,9 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #3D3635;
+  }
   
   nav {
     background-color: #333;
@@ -18,7 +19,7 @@ body {
   }
   
   header {
-    background-color: #f2f2f2;
+    background-color: #FFF8E7;
     padding: 20px;
     text-align: center;
   }
@@ -33,14 +34,13 @@ body {
     margin-top: 50px;
     border: 1px solid #ccc;
     padding: 10px;
-    background-color: #fff; 
+    background-color: #554b4a5d;
   }
 
   
 
   .search-container {
     text-align: center;
-    background-color: #f0f0f0;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -56,12 +56,12 @@ body {
   
   .group-name {
     margin-left: 5px;
-    color: #333;
+    color: #000000;
   }
   
   .group-description {
     margin-left: 10px;
-    color: #666;
+    color: rgba(194, 190, 183, 0.986);
   }
   
   .eventDetails {
@@ -117,7 +117,12 @@ body {
     max-height: 400px;
   }
 
-  input[type="text"] {
+  p {
+    color: rgba(194, 190, 183, 0.986)
+  }
+
+  input[type="text"], 
+  input[type="password"]{
     padding: 10px;
   }
 

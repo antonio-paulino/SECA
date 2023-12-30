@@ -1,4 +1,6 @@
 import express from 'express'
+import passport from 'passport'
+import expressSession from 'express-session'
 import * as secaData from './data/seca-data-elastic.mjs'
 import * as ticketMaster from './data/tm-events-data.mjs'
 import url from 'url'
@@ -18,9 +20,22 @@ const SERVER_URL = `http://localhost:${PORT}`
 console.log("Starting server...")
 
 let app = express()
+
 app.use(express.json())
 app.use(express.urlencoded())
-app.use('/site', express.static('./web/site/public'))
+
+
+app.use(expressSession({
+    secret: "seca-ipw-g3",
+    resave: false,
+    saveUninitialized: false
+}))
+
+app.use(passport.session())
+app.use(passport.initialize())
+passport.serializeUser((user, done) => done(null, user))
+passport.deserializeUser((user, done) => done(null, user))
+
 
 const currentFileDir = url.fileURLToPath(new URL('.', import.meta.url));
 const viewsDir = path.join(currentFileDir, 'web', 'site', 'views')
@@ -28,6 +43,7 @@ app.set('view engine', 'hbs')
 app.set('views', viewsDir);
 
 hbs.registerPartials(path.join(viewsDir, 'partials'))
+
 hbs.registerHelper('calculatePagination', function calculatePagination(type, size, page) {
    
     let pageNum = parseInt(page)
@@ -38,6 +54,14 @@ hbs.registerHelper('calculatePagination', function calculatePagination(type, siz
 });
 
 // SITE ROUTES
+app.get('/site/login', secaSite.getLogin)
+app.post('/site/login', secaSite.validateLogin)
+app.post('/site/logout', secaSite.logOut)
+
+app.get('/site/register', secaSite.getRegister)
+app.post('/site/register', secaSite.register)
+
+app.get('/site/auth', secaSite.checkAuthenticated)
 
 // Search Menu
 app.get('/site/search', secaSite.getSearch)
@@ -57,14 +81,14 @@ app.get('/site/home', secaSite.getHome)
 // Get user groups
 app.get('/site/groups', secaSite.getAllGroups)
 
-// Update group
-app.post('/site/groups/:id/edit', secaSite.updateGroup)
+// Update group 
+//app.post('/site/groups/:id/edit', secaSite.updateGroup)
 
-// Remove Group
-app.post('/site/groups/:id/remove', secaSite.deleteGroup)
+// Remove Group TODO
+//app.post('/site/groups/:id/remove', secaSite.deleteGroup)
 
 // Add Group
-app.post('/site/groups/add', secaSite.createGroup)
+app.post('/site/groups/', secaSite.createGroup)
 
 // Get Group
 app.get('/site/groups/:id', secaSite.getGroup)
@@ -76,10 +100,10 @@ app.get('/site/groups/:id/events/search/popular', secaSite.groupSearchEventsPopu
 app.get('/site/groups/:id/events/search/name', secaSite.groupSearchEvents)
 
 // Add event to group
-app.post('/site/groups/:id/events/add', secaSite.addToGroup)
+//app.post('/site/groups/:id/events/add', secaSite.addToGroup)
 
-// Remove event from group
-app.post('/site/groups/:id/events/delete', secaSite.removeFromGroup)
+// Remove event from group 
+//app.post('/site/groups/:id/events/delete', secaSite.removeFromGroup)
 
 // Get site css
 app.get('/site/css', secaSite.getCss)

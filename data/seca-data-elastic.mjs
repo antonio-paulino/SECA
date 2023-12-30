@@ -8,18 +8,19 @@ await initElasticSearch()
 
 export async function initElasticSearch() {
 
-    const user1 = new User('user 1', "e5ab7d81-f7df-4d76-9acf-0d3c0c73649f", '1')
-    const user2 = new User('user 2', "d5ab7d81-f7df-4d76-9acf-0d3c0c73439f", '2')
+    const user1 = new User('user 1', "e5ab7d81-f7df-4d76-9acf-0d3c0c73649f")
+    const user2 = new User('user 2', "d5ab7d81-f7df-4d76-9acf-0d3c0c73439f")
 
     if(!await indexExists('users')) {
 
         await createIndex('users', {
             username: { type: "keyword"},
-            token: { type: "text" }
+            token: { type: "text" },
+            hash: { type: "text"},
         });
 
-        await fetchElasticSearch(`${ELASTICSEARCH_URL}/users/_doc/${user1.id}`, 'POST', user1)
-        await fetchElasticSearch(`${ELASTICSEARCH_URL}/users/_doc/${user2.id}`, 'POST', user2)
+        await fetchElasticSearch(`${ELASTICSEARCH_URL}/users/_doc`, 'POST', user1)
+        await fetchElasticSearch(`${ELASTICSEARCH_URL}/users/_doc`, 'POST', user2)
    
     }
 
@@ -235,13 +236,17 @@ export async function addUser(user) {
     }
 
     const newUser = new User(user.name, crypto.randomUUID())
-
+   
+    if(user.password) {
+        newUser.hash = crypto.createHash('sha256').update(user.password).digest('hex')
+    }
+   
     const userRes = await createDocument('users', newUser)
 
     newUser.id = userRes._id
     
-
     return newUser
+
 }
 
 export async function findUser(userToken) {
@@ -265,6 +270,25 @@ export async function findUser(userToken) {
 
     return user
     
+}
+
+export async function findUserLogin(username, password) {
+    const res = await searchDocument(`users`, {
+        query: {
+            term: { 'name.keyword': username }, 
+        },
+    })
+
+    if(!res.hits.hits) return null
+
+    const user = res.hits.hits[0]
+
+    if(!user) return null
+
+    if(crypto.createHash('sha256').update(password).digest('hex') !== user._source.hash || user._source.name !== username) return null
+
+    return user
+
 }
 
 

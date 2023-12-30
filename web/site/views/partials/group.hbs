@@ -1,0 +1,34 @@
+  <div class="group" id="group{{id}}">
+      <h2 class="group-name">{{name}}</h2>
+      <p class="group-description">{{description}}</p>
+
+      <button onclick="toggleEditForm('{{id}}')">Edit Group</button>
+
+        <input id="group{{id}}-name" type="text" style="display:none" placeholder="Group name here.." name="name" value="{{name}}">
+        <input id="group{{id}}-desc" type="text" style="display:none" placeholder="Group description here.." name="description" value="{{description}}">
+        <button id="group{{id}}-submit"style="display:none"onclick="editGroup('{{id}}', '{{userID.token}}')">Submit Changes</button>
+        <div class="error-message" id="errorMessage{{id}}"></div>
+        
+  
+    {{#if events.length}}
+      <h3>Events:</h3>
+    <div class="events">
+        {{#each events}}
+            {{> event}}
+        {{/each}}
+    </div>
+     
+
+    {{/if}}
+
+    <div class="bottom-buttons">
+        <form id="ManageEvents" action="groups/{{id}}/" method="GET">
+        <input type="submit" value="Manage Events">
+        </form>
+
+        <button onclick="removeGroup('{{id}}', '{{userID.token}}')">Remove Group</button>
+
+        </form>  
+    </div>
+    
+   </div>

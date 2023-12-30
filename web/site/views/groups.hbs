@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="/site/css"/>
-  <title>User Groups</title>
-</head>
-<body>
-
-
-<nav>
-    <a href="/site/home">Home</a>
-    <a href="/site/search">Search Events</a>
-    <a href="/site/groups">Groups</a>
-</nav>
-
+<title>SECA - Groups</title>
 
 <header>
   <h1>Add a New Group</h1>
-  <form id="addGroup" class="addgroup-form" action="groups/add" method="POST", onsubmit="return validateGroupForm('addGroup')">
+  <form id="addGroup" class="addgroup-form" action="groups" method="POST", onsubmit="return validateGroupForm('addGroup')">
           <p></p>
           <input type="text" placeholder="Group name here.." name="name">
           <p></p>
@@ -32,77 +17,17 @@
 
 
 
-
-
 {{#if groups.length}}
 <div class="groups">
   {{#if groups.length}}
      <h1 class="groups-header">List of Groups</h1>
   {{/if}}
   {{#each groups}}
-    <div class="group" id="group{{id}}">
-      <h3 class="group-name">{{name}}</h3>
-      <p class="group-description">{{description}}</p>
-
-      <button onclick="toggleEditForm('{{id}}')">Edit Group</button>
-
-      <form id="editGroup{{id}}" class="edit-form" action="groups/{{id}}/edit" method="POST" onsubmit="return validateGroupForm('editGroup', '{{id}}')" style="display: none; ">
-        <p></p>
-        <input type="text" placeholder="Group name here.." name="name" value="{{name}}">
-        <p></p>
-        <input type="text" placeholder="Group description here.." name="description" value="{{description}}">
-        <p></p>
-        <div class="error-message" id="errorMessage{{id}}"></div>
-        <input type="submit" style="display: none;">
-      </form>
-  
-    {{#if events.length}}
-      <h4>Events:</h4>
-    <div class="events">
-        {{#each events}}
-         <div class="event">
-         <h4>{{name}}</h4>
-            {{#if date}}
-                <p>Date: {{date}}</p>
-            {{/if}}
-            {{#if genre}}
-                <p>Genre: {{genre}}</p>
-            {{/if}}
-            {{#if segment}}
-                <p>Segment: {{segment}}</p>
-            {{/if}}
-
-        <form id="nameForm" action="event" method="GET">
-            <input type="hidden" name="id" value="{{id}}">
-            <input type="submit" value="More Details...">
-        </form>
-        </div>
-        {{/each}}
-    </div>
-     
-
-    {{/if}}
-
-    <div class="bottom-buttons">
-        <form id="ManageEvents" action="groups/{{id}}/" method="GET">
-        <input type="submit" value="Manage Events">
-        </form>
-
-        <form id="RemoveGroup" action="groups/{{id}}/remove" method="POST">
-        <input type="hidden" name="id" value="{{id}}">
-        <input type="submit" value="Remove Group">
-        </form>  
-    </div>
-    
-
-   </div>
+    {{> group}}
   {{/each}}
 
 </div>
 {{/if}}
 
-<script src="/site/scripts"></script>
 
 
-</body>
-</html>

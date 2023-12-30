@@ -10,7 +10,6 @@ export default function(secaServices) {
         return { 
             getPopularEvents : processRequest(getPopularEventsProcessor),
             searchEvent : processRequest(searchEventProcessor),
-            createUser : processRequest(createUserProcessor),
             createGroup : processRequest(createGroupProcessor, true),
             updateGroup : processRequest(updateGroupProcessor, true),
             getAllGroups : processRequest(getAllGroupsProcessor, true),
@@ -24,7 +23,13 @@ export default function(secaServices) {
             getScripts : processRequest(getScripts),
             getCss : processRequest(getCss),
             groupSearchEventsPopular : processRequest(getPopularEventsProcessor, true),
-            groupSearchEvents : processRequest(searchEventProcessor, true)
+            groupSearchEvents : processRequest(searchEventProcessor, true),
+            getLogin : processRequest(getLogin),
+            getRegister : processRequest(getRegister),
+            register : processRequest(register),
+            validateLogin : processRequest(validateLogin),
+            logOut: processRequest(logOut),
+            checkAuthenticated: processRequest(checkAuthenticated)
         }
 
         function processRequest(reqProcessor, auth) {
@@ -32,8 +37,8 @@ export default function(secaServices) {
         
                 const token = getToken(req)
         
-                if(auth && !token) {
-                    rsp.status(401).json("Not authorized")
+                if(auth && !req.user) {
+                    rsp.redirect('/site/login')
                     return
                 }
         
@@ -63,10 +68,23 @@ export default function(secaServices) {
         async function getHomePage(req, res) {
             sendFile('home.html', 'public', res)
         }
+
+        async function getLogin(req, res) {
+            sendFile('login.html', 'public', res)
+        }
+
+        async function getRegister(req, res) {
+            sendFile('register.html', 'public', res)
+        }
         
         function sendFile(fileName, folder, rsp) {
             const fileLocation = __dirname + `${folder}/` + fileName
             rsp.sendFile(fileLocation)
+        }
+
+        function checkAuthenticated(req, res) {
+            if(req.user) return res.status(200).json()
+            else return res.status(401).json()
         }
         
         async function getEventDetails(req, res) {
@@ -138,7 +156,7 @@ export default function(secaServices) {
         
         async function getAllGroupsProcessor(req, res, token) {
             const groups = await secaServices.getAllGroups(token)
-            res.render('groups', {groups: groups})
+            res.render('groups', {groups: groups, user: req.user})
         }
         
         async function deleteGroupProcessor(req, res, token) {
@@ -188,16 +206,34 @@ export default function(secaServices) {
             return res.redirect(`/site/groups/${req.params.id}/`)
         }
         
-        async function createUserProcessor(req, res) {
-        
+        async function register(req, res) {
+
             const username = req.body.username
         
             if(!username) throw errors.ARGUMENT_MISSING('Username')
+
+            const password = req.body.password
+
+            if(!password) throw errors.ARGUMENT_MISSING('Password')
         
-            const user = await secaServices.createUser(username)
+            const user = await secaServices.createUser(username, password)
         
-            return res.status(201).json({"user-token": user.token})
+            return res.redirect('/site/home')
         
+        }
+
+
+        function logOut(req, rsp) {
+            req.logout((err) => { 
+              rsp.redirect('/site/home')
+            })
+          }
+
+
+        async function validateLogin(req, res) {
+            const user = await secaServices.validateUser(req.body.username, req.body.password)
+            if(user) req.login(user, () => res.redirect('/site/home'))
+            else res.redirect('/site/login')
         }
         
         

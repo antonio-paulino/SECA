@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-   <link rel="stylesheet" type="text/css" href="/site/css"/>
-   <title>Group {{group.name}}</title>
-</head>
 
-<nav>
-    <a href="/site/home">Home</a>
-    <a href="/site/search">Search Events</a>
-    <a href="/site/groups">Groups</a>
-</nav>
-
-<body>
-
-
-
+<title>SECA - Groups</title>
 
 <div class="search-container">
     <h1>Search Events to Add</h1>
@@ -41,8 +25,8 @@
 </div>
 
 <div class="group">
-    <h2>{{group.name}}</h1>
-    <p>{{group.description}}</p>
+    <h2 class="group-name">{{group.name}}</h1>
+    <p class="group-description">{{group.description}}</p>
     <h3>Events:</h3>
 
     <div class="events">
@@ -62,15 +46,14 @@
                     <p>Segment: {{segment}}</p>
                 {{/if}}
                 <div class="bottom-buttons">
+
                 <form id="nameForm" action="/site/event" method="GET">
                     <input type="hidden" name="id" value="{{id}}">
                     <input type="submit" value="More Details...">
                 </form>
 
-                <form id="removeForm" action="events/delete" method="POST">
-                    <input type="hidden" name="id" value="{{id}}">
-                    <input type="submit" value="Remove From Group">
-                </form>
+                <button onclick="removeFromGroup('{{id}}', '{{../group.id}}', '{{../group.userID.token}}')">Remove From Group</button>
+
                 </div>
             </div>
         {{/each}}
@@ -78,8 +61,4 @@
 
      </div>
     </div>  
-</body> 
 
-<script src="/site/scripts"></script>
-
-</html>

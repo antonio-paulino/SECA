@@ -16,7 +16,8 @@ export default function(secaData, ticketMaster) {
         removeEventFromGroup: removeEventFromGroup,
         getUserId: getUserId,
         getGroup: getGroup,
-        validateUUID: validateUUID
+        validateUUID: validateUUID,
+        validateUser: validateUser
     }
      async function getPopularEvents(s, p) {
         return await ticketMaster.getPopularEvents(s, p)
@@ -49,8 +50,9 @@ export default function(secaData, ticketMaster) {
         return await secaData.getGroups(user)
     }
     
-     async function createUser(username) {
+     async function createUser(username, password) {
         const user = new User(username)
+        user.password = password
         return await secaData.addUser(user)
     }
     
@@ -93,6 +95,10 @@ export default function(secaData, ticketMaster) {
         if (group.userID.token != user.token) throw errors.NOT_AUTHORIZED(`User ${user.name}`, group.name)
         return group
     
+    }
+
+    async function validateUser(username, password) {
+        return await secaData.findUserLogin(username, password)
     }
     
     

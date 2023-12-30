@@ -7,18 +7,20 @@
 </head>
 <body>
 
-
 <nav>
-  <a href="/site/home">Home</a>
-  <a href="/site/search">Search Events</a>
-  <a href="/site/groups">Groups</a>
+    <a href="/site/home">Home</a>
+    <a href="/site/search">Search Events</a>
+    <a href="/site/groups">Groups</a>
+    <a style="display:none" href="/site/login" id="registerLink">Login</a>
+    <a style="display:none" href="/site/register" id= "loginLink">Register</a>
+    <form id="logoutForm" style="display:none" action="/site/logout" method="post">
+      <button type="submit">Log Out</button>
+    </form>
 </nav>
 
 <header>
    <h1>Search for Events</h1>
 </header>
-
-
 
 
 <div class="search-container">
@@ -45,5 +47,4 @@
 
 <script src="/site/scripts"></script>
 
-</body>
 </html>

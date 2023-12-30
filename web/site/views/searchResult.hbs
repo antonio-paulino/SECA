@@ -1,65 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Search Results</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="/site/css"/>
-  <nav>
-    <a href="/site/home">Home</a>
-    <a href="/site/search">Search Events</a>
-    <a href="/site/groups">Groups</a>
-  </nav>
-</head>
-<body>
+<title>SECA - Events</title>
+
 
 {{#if group}}
     <div class="events">
       {{#each events}}
-        <div class="event">
-          <input type="checkbox" class="checkmark" name="selectedEvent" value="{{id}}">
-          <h2>{{name}}</h2>
-          {{#if date}}
-            <p>Date: {{date}}</p>
-          {{/if}}
-          {{#if genre}}
-            <p>Genre: {{genre}}</p>
-          {{/if}}
-          {{#if segment}}
-            <p>Segment: {{segment}}</p>
-          {{/if}}
-          <div class="bottom-buttons">
-          <form id="nameForm" action="/site/event" method="GET">
-            <input type="hidden" name="id" value="{{id}}">
-            <input type="submit"  value="More Details...">
-          </form>
-          </div>
-        </div>
+          {{> eventResult}}
       {{/each}}
   </div>
     <div class="bottom-buttons">
-        <button onclick="addSelectedEvents('{{group.id}}')">Add Selected Events (Repeat Events will not be added)</button>
+        <button onclick="addSelectedEvents('{{group.id}}', '{{group.userID.token}}')">Add Selected Events (Repeat Events will not be added)</button>
     </div>
   
 
 {{else}}
   <div class="events">
     {{#each events}}
-      <div class="event">
-        <h2>{{name}}</h2>
-        {{#if date}}
-          <p>Date: {{date}}</p>
-        {{/if}}
-        {{#if genre}}
-          <p>Genre: {{genre}}</p>
-        {{/if}}
-        {{#if segment}}
-          <p>Segment: {{segment}}</p>
-        {{/if}}
-        <form id="nameForm" action="/site/event" method="GET">
-          <input type="hidden" name="id" value="{{id}}">
-          <input type="submit" value="More Details...">
-        </form>
-      </div>
+      {{> eventResult}}
     {{/each}}
 
   </div>
@@ -77,9 +33,4 @@
 
     </div>
 
-
-<script src="/site/scripts"></script>
-
-</body>
-</html>
 
