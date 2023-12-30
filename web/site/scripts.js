@@ -139,7 +139,7 @@ function removeFromGroup(eventId, groupID, userToken) {
     })
     .then(response => {
         if (response.ok) {
-            window.location = `/site/groups/${groupID}`
+            window.location = `/site/groups/${groupID}/`
         }
     })
     .catch(error => {
