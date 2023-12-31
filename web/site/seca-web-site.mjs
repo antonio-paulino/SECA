@@ -195,7 +195,7 @@ export default function(secaServices) {
         
             const group = await secaServices.addToGroup(req.params.id, req.body.id, token)
         
-            return res.redirect(`/site/groups/${group.id}/`)
+            return res.redirect(`/site/groups/${group.id}`)
         
         }
         
@@ -217,8 +217,10 @@ export default function(secaServices) {
             if(!password) throw errors.ARGUMENT_MISSING('Password')
         
             const user = await secaServices.createUser(username, password)
-        
-            return res.redirect('/site/home')
+            console.log(user)
+
+            if(user) req.login(user, () =>  res.redirect('/site/home'))
+            else return res.redirect('/site/home')
         
         }
 
@@ -242,11 +244,7 @@ export default function(secaServices) {
         }
         
         function getToken(req) {
-            return 'e5ab7d81-f7df-4d76-9acf-0d3c0c73649f'
-            //const token = req.get("Authorization")
-            //if(token) {
-            //    return token.split(" ")[1]
-            //}
+            return (req.user) ? req.user.token : ''
         }
 }
 

@@ -171,7 +171,8 @@ export async function getGroups(user) {
             term: { 'userID.id': user.id },
         },
     })
-    
+    console.log(user)
+
     res.hits.hits.forEach(group => {
         group._source.id = group._id
         groups.push(group._source)
@@ -243,9 +244,7 @@ export async function addUser(user) {
    
     const userRes = await createDocument('users', newUser)
 
-    newUser.id = userRes._id
-    
-    return newUser
+    return new User(newUser.name, newUser.token, userRes._id)
 
 }
 
@@ -266,9 +265,8 @@ export async function findUser(userToken) {
     }
 
     let user = userWithToken[0]._source
-    user.id = userWithToken[0]._id
 
-    return user
+    return new User(user.name, user.token, userWithToken[0]._id)
     
 }
 
@@ -287,7 +285,7 @@ export async function findUserLogin(username, password) {
 
     if(crypto.createHash('sha256').update(password).digest('hex') !== user._source.hash || user._source.name !== username) return null
 
-    return user
+    return new User(user._source.name, user._source.token, user._id)
 
 }
 

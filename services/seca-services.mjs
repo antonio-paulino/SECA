@@ -54,7 +54,7 @@ export default function(secaData, ticketMaster) {
         const user = new User(username)
         user.password = password
         return await secaData.addUser(user)
-    }
+     }
     
      async function deleteGroup(groupId,token) {
         const user = await getUserId(token)
