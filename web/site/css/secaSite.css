@@ -54,6 +54,12 @@
   }
 
   
+  #registerLink,
+  #loginLink,
+  #logoutForm {
+      display: none;
+  }
+
   .group-name {
     margin-left: 5px;
     color: #000000;
