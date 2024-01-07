@@ -1,9 +1,6 @@
----
-title: Shows & Events Chelas Application 
-language_tabs:
-  - javascript: JavaScript
-author: António Paulino - 50512 | Bernardo Pereira - 50493
-headingLevel: 2
+
+## António Paulino - 50512 | Bernardo Pereira - 50493
+
 ---
 
 # Shows & Events Chelas Application 
