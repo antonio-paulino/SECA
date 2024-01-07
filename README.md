@@ -5,7 +5,7 @@
 
 # Shows & Events Chelas Application 
 
-A aplicação Shows & Events Chelas Application (SECA) fornece uma API e um Website que fornecem operações que envolvem pesquisa de eventos e utilização de grupos para organizar ditos eventos. 
+A aplicação Shows & Events Chelas Application (SECA) fornece uma API e um Website com operações que envolvem pesquisa de eventos e utilização de grupos para organizar ditos eventos. 
 
 Esta wiki visa descrever a aplicação desenvolvida, bem como fornecer instruções de utilização da mesma. Será também incluída nesta wiki a documentação da API para uso.
 
