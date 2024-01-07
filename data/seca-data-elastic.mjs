@@ -14,6 +14,7 @@ export async function initElasticSearch() {
     if(!await indexExists('users')) {
 
         await createIndex('users', {
+            id: {type : 'keyword'},
             username: { type: "keyword"},
             token: { type: "text" },
             hash: { type: "text"},
@@ -171,8 +172,7 @@ export async function getGroups(user) {
             term: { 'userID.id': user.id },
         },
     })
-    console.log(user)
-
+    
     res.hits.hits.forEach(group => {
         group._source.id = group._id
         groups.push(group._source)

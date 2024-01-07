@@ -1,0 +1,80 @@
+@startuml
+!theme reddress-darkred
+<style>
+
+component {
+    BackGroundColor #Orange
+    LineThickness 1
+    LineColor black
+}
+collections {
+    BackGroundColor #Orange
+    LineThickness 1
+    LineColor black
+}
+
+database {
+    BackGroundColor Gray
+    LineThickness 1
+    LineColor black
+}
+
+node {
+    BackGroundColor #Orange
+    LineThickness 1
+    LineColor black
+}
+
+</style>
+
+
+rectangle "Seca Application" {
+
+artifact "seca-server" as server
+artifact "seca-web-site" as site
+artifact "seca-web-api" as api
+artifact "seca-services" as services
+artifact "tm-events-data" as tmdata
+artifact "seca-data-elastic" as elastic
+artifact "seca-classes" as classes
+
+database "ElasticSearch" as elasticdb {
+    collections "users"
+    collections "groups"
+}
+
+component "node-modules" as modules {
+    component "express" as express
+    component "express-session" as session
+    component "hbs" as hbs
+    component "passport" as passport
+}
+
+start -u-> server
+
+}
+
+cloud "Web" as web
+collections "WebClient" as client
+node "Ticket Master API" as tmAPI
+
+server -r-> modules
+server -d-> site
+server -d-> api
+session --[dashed]> site
+express --[dashed]> site
+express --[dashed]> api
+passport --[dashed]> site
+hbs --[dashed]> site
+site --> services
+api --> services
+services --> elastic
+services --> tmdata
+elastic --> elasticdb
+tmdata --> web
+classes <- services
+classes <- elastic
+client <- web
+web --> tmAPI
+web --> express
+@enduml

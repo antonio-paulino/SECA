@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Tasks API
+  title: SECA API
   description: This is a simple API for managing event and group operations.
   license:
     name: Apache 2.0
@@ -93,6 +93,24 @@ paths:
             400:
               $ref: "#/components/responses/400BadRequest"
 
+    /events/{id}:
+      description: Resource that represents a specific event
+      get:
+          tags:
+            - Events
+          summary: Get more event details
+          parameters:
+              - name: id
+                in: query
+                description: Event ID
+                schema:
+                    type: string
+          responses:
+            200:
+              description: Gets event details
+            400:
+              $ref: "#/components/responses/400BadRequest"
+
 
     /users:
       description: The resource that contains all users
@@ -150,6 +168,9 @@ paths:
                       type: array
                       items: 
                         $ref: "#components/schemas/Group"
+            401:
+              description: No Authorization
+              content: {}
             404:
               $ref: "#/components/responses/404NotFound"
             400:
@@ -184,6 +205,9 @@ paths:
                 application/json:
                   schema:
                       $ref: '#components/schemas/Group'
+            401:
+              description: No Authorization
+              content: {}
             400:
               $ref: "#/components/responses/400BadRequest"
 
@@ -220,6 +244,9 @@ paths:
                 application/json:
                     schema: 
                       $ref: '#components/schemas/Group'
+            401:
+              description: No Authorization
+              content: {}
             404:
               $ref: "#/components/responses/404NotFound"
 
@@ -251,7 +278,9 @@ paths:
             200:
               description: Group deleted
               content: {}
-            
+            401:
+              description: No Authorization
+              content: {}
             404:
               $ref: "#/components/responses/404NotFound"
 
@@ -292,6 +321,9 @@ paths:
                 application/json:
                     schema: 
                       $ref: '#components/schemas/Group'
+            401:
+              description: No Authorization
+              content: {}
 
             404:
               $ref: "#/components/responses/404NotFound"
@@ -337,6 +369,9 @@ paths:
                 application/json:
                     schema: 
                       $ref: '#components/schemas/Group'
+            401:
+              description: No Authorization
+              content: {}
             404:
               $ref: "#/components/responses/404NotFound"
 
@@ -380,6 +415,9 @@ paths:
                   application/json:
                       schema: 
                         $ref: '#components/schemas/Group'
+              401:
+                description: No Authorization
+                content: {}
               404:
                 $ref: "#/components/responses/404NotFound"
 

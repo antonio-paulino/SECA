@@ -217,7 +217,6 @@ export default function(secaServices) {
             if(!password) throw errors.ARGUMENT_MISSING('Password')
         
             const user = await secaServices.createUser(username, password)
-            console.log(user)
 
             if(user) req.login(user, () =>  res.redirect('/site/home'))
             else return res.redirect('/site/home')
